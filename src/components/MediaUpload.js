@@ -23,7 +23,7 @@ class MediaUpload extends Component {
         const props = {
             action: `${MTSRV_BACKEND}/coder/upload`,
             type: 'drag',
-            accept: '.mp4, .mp3, .m4a',
+            accept: '.mp4, .mpg, .mov, .avi, .wav, .mp3, .mp4a',
             beforeUpload(file) {
                 console.log('beforeUpload', file.name);
             },
@@ -46,8 +46,8 @@ class MediaUpload extends Component {
                         onSuccess={this.uploadDone}
                         onProgress={this.progress} >
                         Drop file here or click me
+                        <Progress label='' percent={this.state.percent} indicating progress='percent' />
                     </Upload>
-                    <Progress label='' percent={this.state.percent} indicating progress='percent' />
                 </Message>
             </Segment>
         );
