@@ -55,14 +55,14 @@ class CoderFiles extends Component {
                             </Dropdown.Menu>
                         </Dropdown>
                     </Menu.Item>
-                    <Menu.Item>
+                    <Menu.Item position='right'>
                         <Dropdown item text={preset || "Select Preset:"}>
                             <Dropdown.Menu>
                                 {presets}
                             </Dropdown.Menu>
                         </Dropdown>
                     </Menu.Item>
-                    <Menu.Item position='right'>
+                    <Menu.Item>
                         <Button primary disabled={file === "" || !preset} onClick={this.startCoder}>Start</Button>
                     </Menu.Item>
                 </Menu>
