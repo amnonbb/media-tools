@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
+import { Segment, Tab } from 'semantic-ui-react'
+import 'semantic-ui-css/semantic.min.css';
 import './App.css';
+import Settings from "./components/Settings";
+import CoderApp from "./components/CoderApp";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  state = {
+    settings:{},
+    settings_id: null,
+  };
+
+  render() {
+
+    const {settings} = this.state;
+
+    const panes = [
+      { menuItem: { key: 'coder', icon: 'cog', content: 'Coder' },
+        render: () => <Tab.Pane attached={false} >
+          <CoderApp getState={this.getState}
+                    settings={settings}/>
+        </Tab.Pane> },
+      { menuItem: { key: 'settings', icon: 'options', content: 'Options' },
+        render: () => <Tab.Pane attached={false} >
+          <Settings getState={this.getState}
+                    settings={settings}/>
+        </Tab.Pane> },
+    ];
+
+    return (
+        <Segment basic padded>
+          <Tab menu={{ secondary: true, pointing: true, color: "blue"}} panes={panes} />
+        </Segment>
+    );
+  }
 }
 
 export default App;
