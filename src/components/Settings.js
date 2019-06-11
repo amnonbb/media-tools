@@ -33,9 +33,9 @@ class Settings extends Component {
         }
     };
 
-    savePreset = () => {
+    savePreset = (del) => {
         let {settings,name,audio_filter,video_filter,audio_codec,video_codec} = this.state;
-        settings[name] = {name,audio_filter,video_filter,audio_codec,video_codec};
+        del ? delete settings[name] : settings[name] = {name,audio_filter,video_filter,audio_codec,video_codec};
         putData(`settings`, settings, (data) => {
             console.log(" :: Save presets callback: ", data);
             this.setState({settings});
@@ -84,6 +84,7 @@ class Settings extends Component {
                     <Table.Row>
                         <Table.HeaderCell>
                             <Button size='small' positive onClick={this.savePreset}>Save</Button>
+                            <Button size='small' negative onClick={() => this.savePreset(true)}>Delete</Button>
                         </Table.HeaderCell>
                     </Table.Row>
                 </Table.Footer>
