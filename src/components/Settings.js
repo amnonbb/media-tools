@@ -83,7 +83,7 @@ class Settings extends Component {
                 <Table.Footer fullWidth>
                     <Table.Row>
                         <Table.HeaderCell>
-                            <Button size='small' positive onClick={this.savePreset}>Save</Button>
+                            <Button size='small' positive onClick={() => this.savePreset(false)}>Save</Button>
                             <Button size='small' negative onClick={() => this.savePreset(true)}>Delete</Button>
                         </Table.HeaderCell>
                     </Table.Row>

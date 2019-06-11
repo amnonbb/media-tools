@@ -11,7 +11,7 @@ class CoderMonitor extends Component {
 
     componentDidMount() {
         let ival = setInterval(() =>
-            getStatus("convert", (data) => {
+            getStatus("mtools", (data) => {
                 let convert = JSON.parse(data.stdout);
                 convert.splice(0,1);
                 if (JSON.stringify(this.state.convert) !== JSON.stringify(data)) {
@@ -51,13 +51,14 @@ class CoderMonitor extends Component {
         let convert_data = this.state.convert.map((data, i) => {
             let state = data.State;
             let task = data.Script.split('[')[1].split(']')[0];
-            let name = <div>{state === "running" ? l : ""}&nbsp;&nbsp;&nbsp;{data.Arg2}</div>;
-            let dest = state === "running" ? data.Arg1 : "convert";
+            let label = JSON.parse(task);
+            let name = <div>{state === "running" ? l : ""}&nbsp;&nbsp;&nbsp;{label.file_name}</div>;
+            //let dest = state === "running" ? data.Arg1 : "convert";
             let ncolor = state === "running";
             return (
                 <Table.Row key={i} warning={ncolor} className="monitor_tr">
-                    <Table.Cell>{task}</Table.Cell>
-                    <Table.Cell>{dest}</Table.Cell>
+                    <Table.Cell>{label.source}</Table.Cell>
+                    <Table.Cell>{label.preset_name}</Table.Cell>
                     <Table.Cell>{name}</Table.Cell>
                     <Table.Cell>{state}</Table.Cell>
                 </Table.Row>
@@ -71,9 +72,9 @@ class CoderMonitor extends Component {
                 <Table compact='very' basic size='small'>
                     <Table.Header>
                         <Table.Row className='table_header'>
-                            <Table.HeaderCell width={2}>Dest</Table.HeaderCell>
-                            <Table.HeaderCell width={2}>Task</Table.HeaderCell>
-                            <Table.HeaderCell>Name</Table.HeaderCell>
+                            <Table.HeaderCell width={2}>Source</Table.HeaderCell>
+                            <Table.HeaderCell width={2}>Preset</Table.HeaderCell>
+                            <Table.HeaderCell>File Name</Table.HeaderCell>
                             <Table.HeaderCell width={1}>Progress</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>

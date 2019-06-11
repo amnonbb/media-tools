@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Menu, Segment, Dropdown, Button, Label } from 'semantic-ui-react'
+import { Menu, Segment, Dropdown, Button } from 'semantic-ui-react'
 import {getData,mediaTools} from "../shared/tools";
 
 class CoderFiles extends Component {
@@ -63,8 +63,7 @@ class CoderFiles extends Component {
         });
 
         return (
-            <Segment textAlign='center' className="ingest_segment" color='blue' basic>
-                {/*<Label>{file || ""}</Label>*/}
+            <Segment textAlign='center' className="ingest_segment" color='red' raised>
                 <Menu secondary>
                     <Menu.Item>
                         <Dropdown button text={file || "Select File:"} onClick={this.getFiles}>
