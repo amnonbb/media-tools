@@ -1,7 +1,7 @@
 export const IVAL = 1000;
 export const MTDB_STATE = process.env.REACT_APP_MTDB_STATE;
-export const MTSRV_BACKEND = process.env.NODE_ENV !== 'production' ? process.env.REACT_APP_MTSRV_BACKEND : '/wfapi';
-export const CNV_BACKEND = process.env.NODE_ENV !== 'production' ? process.env.REACT_APP_CNV_BACKEND : '/cnvapi';
+export const MTSRV_BACKEND = process.env.REACT_APP_MTSRV_BACKEND;
+export const CNV_BACKEND = process.env.REACT_APP_CNV_BACKEND;
 
 
 export const getData = (path, cb) => fetch(`${MTDB_STATE}/${path}`)
