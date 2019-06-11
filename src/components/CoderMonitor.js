@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getStatus, IVAL } from '../shared/tools';
+import { getStatus, IVAL, MTSRV_BACKEND } from '../shared/tools';
 import { Table, Container, Loader } from 'semantic-ui-react'
 
 class CoderMonitor extends Component {
@@ -17,19 +17,13 @@ class CoderMonitor extends Component {
                 if (JSON.stringify(this.state.convert) !== JSON.stringify(data)) {
                     let wfts = [];
                     convert.forEach(function (item) {
-                        var itemts = item.split(/\s+/);
+                        let itemts = item.split(/\s+/);
                         if (itemts[1] !== undefined && itemts[1].match(/^(running|queued)$/)) {
-                            var jsonts = {
-                                "ID": itemts[0],
-                                "State": itemts[1],
-                                "Log": itemts[2],
-                                "ELevel": null,
-                                "Times": null,
-                                "Script": itemts[3],
-                                "Arg1": itemts[4],
-                                "Arg2": itemts[5],
-                                "Arg3": itemts[6],
-                            };
+                            let jsonts = {"State": itemts[1], "Script": itemts[3],};
+                            wfts.push(jsonts);
+                        }
+                        if (itemts[1] !== undefined && itemts[1].match(/^(finished)$/)) {
+                            let jsonts = {"State": itemts[1], "Script": itemts[5]};
                             wfts.push(jsonts);
                         }
                     });
@@ -50,19 +44,29 @@ class CoderMonitor extends Component {
 
         let convert_data = this.state.convert.map((data, i) => {
             let state = data.State;
-            let task = data.Script.split('[')[1].split(']')[0];
-            let label = JSON.parse(task);
-            let name = <div>{state === "running" ? l : ""}&nbsp;&nbsp;&nbsp;{label.file_name}</div>;
-            //let dest = state === "running" ? data.Arg1 : "convert";
-            let ncolor = state === "running";
-            return (
-                <Table.Row key={i} warning={ncolor} className="monitor_tr">
-                    <Table.Cell>{label.source}</Table.Cell>
-                    <Table.Cell>{label.preset_name}</Table.Cell>
-                    <Table.Cell>{name}</Table.Cell>
-                    <Table.Cell>{state}</Table.Cell>
-                </Table.Row>
-            )
+            if(data.Script) {
+                let task = data.Script.split('[')[1].split(']')[0];
+                let label = JSON.parse(task);
+                //let dest = state === "running" ? data.Arg1 : "convert";
+                let ncolor = state === "running";
+                let fcolor = state === "finished";
+                let ext = label.preset_name.split("_")[0];
+                let file = label.file_name.split(".")[0];
+                let href = `${MTSRV_BACKEND}/get/${file}.${ext}`;
+                let name = <div>{state === "running" ? l : ""}&nbsp;&nbsp;&nbsp;{label.file_name}</div>;
+                let link = state === "finished" ? (<a href={href}>{name}</a>) : (<b>{name}</b>);
+                return (
+                    <Table.Row key={i} warning={ncolor} positive={fcolor} className="monitor_tr">
+                        <Table.Cell>{label.source}</Table.Cell>
+                        <Table.Cell>{label.preset_name}</Table.Cell>
+                        <Table.Cell>{link}</Table.Cell>
+                        <Table.Cell>{state}</Table.Cell>
+                    </Table.Row>
+                )
+            } else {
+                return false;
+            }
+
         });
 
         return (
