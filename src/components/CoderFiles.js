@@ -8,7 +8,8 @@ class CoderFiles extends Component {
         files: [],
         file: "",
         preset: null,
-        settings: {}
+        settings: {},
+        data: {},
     };
 
     componentDidMount() {
@@ -28,19 +29,24 @@ class CoderFiles extends Component {
     };
 
     startCoder = () => {
-        let req = {"id":"coder", "req":"start"};
+        let {data} = this.state;
+        let req = {"id":"coder", "req":"start",data};
         mediaTools(`coder`, req,  (data) => {
             console.log(":: Coder Stated :: ",data);
         });
     };
 
     selectPreset = (preset) => {
-        this.setState({preset});
+        let {settings,data} = this.state;
+        data.preset = settings[preset];
+        this.setState({preset,data});
     };
 
     selectFile = (file) => {
+        let {data} = this.state;
+        data.file = file;
         console.log(":: Select file: ",file);
-        this.setState({file});
+        this.setState({file,data});
     };
 
     render() {
