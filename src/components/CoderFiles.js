@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { Menu, Segment, Dropdown, Button, Label } from 'semantic-ui-react'
-import {getData} from "../shared/tools";
+import {getData,mediaTools} from "../shared/tools";
 
 class CoderFiles extends Component {
 
@@ -15,6 +15,15 @@ class CoderFiles extends Component {
         getData(`settings`, (settings) => {
             console.log(":: Got settings: ",settings);
             this.setState({settings});
+        });
+    };
+
+    getFiles = () => {
+        let req = {"id":"coder", "req":"files"};
+        mediaTools(`files`, req,  (data) => {
+            let files = data.jsonst.files;
+            console.log(":: Got files: ",files);
+            this.setState({files});
         });
     };
 
@@ -46,17 +55,17 @@ class CoderFiles extends Component {
 
         return (
             <Segment textAlign='center' className="ingest_segment" color='blue' basic>
-                <Label>{file || ""}</Label>
+                {/*<Label>{file || ""}</Label>*/}
                 <Menu secondary>
                     <Menu.Item>
-                        <Dropdown item text='Select File:'>
+                        <Dropdown button text={file || "Select File:"} onClick={this.getFiles}>
                             <Dropdown.Menu>
                                 {files_list}
                             </Dropdown.Menu>
                         </Dropdown>
                     </Menu.Item>
                     <Menu.Item position='right'>
-                        <Dropdown item text={preset || "Select Preset:"}>
+                        <Dropdown button text={preset || "Select Preset:"}>
                             <Dropdown.Menu>
                                 {presets}
                             </Dropdown.Menu>
