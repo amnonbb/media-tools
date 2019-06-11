@@ -27,6 +27,13 @@ class CoderFiles extends Component {
         });
     };
 
+    startCoder = () => {
+        let req = {"id":"coder", "req":"start"};
+        mediaTools(`coder`, req,  (data) => {
+            console.log(":: Coder Stated :: ",data);
+        });
+    };
+
     selectPreset = (preset) => {
         this.setState({preset});
     };
@@ -34,10 +41,6 @@ class CoderFiles extends Component {
     selectFile = (file) => {
         console.log(":: Select file: ",file);
         this.setState({file});
-    };
-
-    startCoder = () => {
-        console.log(":: START :: ");
     };
 
     render() {
