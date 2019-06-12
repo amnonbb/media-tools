@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {getStatus, IVAL, mediaTools, MTSRV_BACKEND} from '../shared/tools';
+import {getStatus, IVAL, mediaTools, getPercent, MTSRV_BACKEND} from '../shared/tools';
 import { Table, Container, Loader } from 'semantic-ui-react'
 
 class CoderMonitor extends Component {
@@ -11,12 +11,16 @@ class CoderMonitor extends Component {
     };
 
     componentDidMount() {
+        let {progress} = this.state;
         let ival = setInterval(() =>
             getStatus("mtools", (data) => {
                 let convert = JSON.parse(data.stdout);
                 convert.splice(0,1);
                 if (JSON.stringify(this.state.convert) !== JSON.stringify(data)) {
-                    this.getProgress();
+                    let req = {"id":"coder", "req":"captime"};
+                    mediaTools(`files`, req,  (data) => {
+                        progress = data.stdout.split('.')[0];
+                    });
                     let wfts = [];
                     convert.forEach(function (item) {
                         let itemts = item.split(/\s+/);
@@ -29,22 +33,12 @@ class CoderMonitor extends Component {
                             wfts.push(jsonts);
                         }
                     });
-                    this.setState({convert: wfts})
+                    this.setState({convert: wfts,progress})
                 }
             }), IVAL
         );
         this.setState({ival});
     };
-
-    getProgress = () => {
-        let req = {"id":"coder", "req":"captime"};
-        mediaTools(`files`, req,  (data) => {
-            let progress = data.stdout.split('.')[0];
-            //console.log(":: Got files: ",progress);
-            this.setState({progress});
-        });
-    };
-
 
     componentWillUnmount() {
         clearInterval(this.state.ival);
@@ -58,21 +52,22 @@ class CoderMonitor extends Component {
             if(data.Script) {
                 let task = data.Script.split('[')[1].split(']')[0];
                 let label = JSON.parse(task);
-                let proc = state === "running" ? this.state.progress : state;
+                let proc = state === "running" ? getPercent(label.duration.split('.')[0], this.state.progress) : label.duration;
                 let ncolor = state === "running";
                 let fcolor = state === "finished";
                 let ext = label.preset_name.split("_")[0];
                 let file = label.file_name.split(".")[0];
                 let href = `${MTSRV_BACKEND}/get/${file}.${ext}`;
-                let name = <div>{state === "running" ? l : ""}&nbsp;&nbsp;&nbsp;{label.file_name}</div>;
-                let link = state === "finished" ? (<a href={href}>{name}</a>) : (<b>{name}</b>);
+                //let name = <div>{state === "running" ? l : ""}&nbsp;&nbsp;&nbsp;{label.file_name}</div>;
+                let link = state === "finished" ? (<a href={href}>{label.file_name}</a>) : (<b>{label.file_name}</b>);
+                let progress = state === "running" ? (<b>{l}&nbsp;&nbsp;&nbsp;{proc}&nbsp;%</b>) : state;
                 return (
                     <Table.Row key={i} warning={ncolor} positive={fcolor} className="monitor_tr">
                         <Table.Cell>{label.source}</Table.Cell>
                         <Table.Cell>{label.preset_name}</Table.Cell>
                         <Table.Cell>{link}</Table.Cell>
-                        <Table.Cell>{label.duration}</Table.Cell>
-                        <Table.Cell>{proc}</Table.Cell>
+                        <Table.Cell>{label.duration.split('.')[0]}</Table.Cell>
+                        <Table.Cell>{progress}</Table.Cell>
                     </Table.Row>
                 )
             } else {
@@ -88,11 +83,11 @@ class CoderMonitor extends Component {
                 <Table compact='very' basic size='small'>
                     <Table.Header>
                         <Table.Row className='table_header'>
-                            <Table.HeaderCell width={2}>Source</Table.HeaderCell>
+                            <Table.HeaderCell width={1}>Source</Table.HeaderCell>
                             <Table.HeaderCell width={2}>Preset</Table.HeaderCell>
                             <Table.HeaderCell>File Name</Table.HeaderCell>
                             <Table.HeaderCell width={2}>Duration</Table.HeaderCell>
-                            <Table.HeaderCell width={1}>Progress</Table.HeaderCell>
+                            <Table.HeaderCell width={2}>Progress</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
 

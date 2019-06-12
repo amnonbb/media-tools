@@ -3,6 +3,16 @@ export const MTDB_STATE = process.env.REACT_APP_MTDB_STATE;
 export const MTSRV_BACKEND = process.env.REACT_APP_MTSRV_BACKEND;
 export const CNV_BACKEND = process.env.REACT_APP_CNV_BACKEND;
 
+export const totalSeconds = (time) => {
+    var parts = time.split(':');
+    return parts[0] * 3600 + parts[1] * 60 + parts[2];
+};
+
+export const getPercent = (total,current) => {
+    let percent = (100 * totalSeconds(current) / totalSeconds(total)).toFixed(0);
+    percent = +percent || 0;
+    return percent;
+};
 
 export const getData = (path, cb) => fetch(`${MTDB_STATE}/${path}`)
     .then((response) => {
