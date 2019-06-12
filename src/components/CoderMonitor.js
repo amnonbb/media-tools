@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { getStatus, IVAL, MTSRV_BACKEND } from '../shared/tools';
+import {getStatus, IVAL, mediaTools, MTSRV_BACKEND} from '../shared/tools';
 import { Table, Container, Loader } from 'semantic-ui-react'
 
 class CoderMonitor extends Component {
 
     state = {
         convert: [],
+        progress: "",
         ival: null,
     };
 
@@ -15,6 +16,7 @@ class CoderMonitor extends Component {
                 let convert = JSON.parse(data.stdout);
                 convert.splice(0,1);
                 if (JSON.stringify(this.state.convert) !== JSON.stringify(data)) {
+                    this.getProgress();
                     let wfts = [];
                     convert.forEach(function (item) {
                         let itemts = item.split(/\s+/);
@@ -34,6 +36,15 @@ class CoderMonitor extends Component {
         this.setState({ival});
     };
 
+    getProgress = () => {
+        let req = {"id":"coder", "req":"captime"};
+        mediaTools(`files`, req,  (data) => {
+            let progress = data.stdout.split('.')[0];
+            //console.log(":: Got files: ",progress);
+            this.setState({progress});
+        });
+    };
+
 
     componentWillUnmount() {
         clearInterval(this.state.ival);
@@ -47,7 +58,7 @@ class CoderMonitor extends Component {
             if(data.Script) {
                 let task = data.Script.split('[')[1].split(']')[0];
                 let label = JSON.parse(task);
-                //let dest = state === "running" ? data.Arg1 : "convert";
+                let proc = state === "running" ? this.state.progress : state;
                 let ncolor = state === "running";
                 let fcolor = state === "finished";
                 let ext = label.preset_name.split("_")[0];
@@ -60,7 +71,8 @@ class CoderMonitor extends Component {
                         <Table.Cell>{label.source}</Table.Cell>
                         <Table.Cell>{label.preset_name}</Table.Cell>
                         <Table.Cell>{link}</Table.Cell>
-                        <Table.Cell>{state}</Table.Cell>
+                        <Table.Cell>{label.duration}</Table.Cell>
+                        <Table.Cell>{proc}</Table.Cell>
                     </Table.Row>
                 )
             } else {
@@ -79,6 +91,7 @@ class CoderMonitor extends Component {
                             <Table.HeaderCell width={2}>Source</Table.HeaderCell>
                             <Table.HeaderCell width={2}>Preset</Table.HeaderCell>
                             <Table.HeaderCell>File Name</Table.HeaderCell>
+                            <Table.HeaderCell width={2}>Duration</Table.HeaderCell>
                             <Table.HeaderCell width={1}>Progress</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
