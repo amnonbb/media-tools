@@ -6,7 +6,7 @@ class CoderFiles extends Component {
 
     state = {
         files: [],
-        file: "",
+        file_set: [],
         preset: null,
         settings: {},
         data: {},
@@ -28,11 +28,19 @@ class CoderFiles extends Component {
         });
     };
 
+    selectFile = (file_set) => {
+        let {data} = this.state;
+        data.file_set = file_set;
+        console.log(":: Select file_set: ",file_set);
+        this.setState({file_set,data});
+    };
+
     startCoder = () => {
         let {data} = this.state;
         let req = {"id":"coder", "req":"start",data};
         mediaTools(`coder`, req,  (data) => {
             console.log(":: Coder Stated :: ",data);
+            this.setState({preset: null, file_set: []})
         });
     };
 
@@ -42,19 +50,12 @@ class CoderFiles extends Component {
         this.setState({preset,data});
     };
 
-    selectFile = (file) => {
-        let {data} = this.state;
-        data.file = file;
-        console.log(":: Select file: ",file);
-        this.setState({file,data});
-    };
-
     render() {
-        const {file,files,preset,settings} = this.state;
+        const {file_set,files,preset,settings} = this.state;
 
-        let files_list = files.map((id, i) => {
-            return (<Dropdown.Item key={i} onClick={() => this.selectFile(id)}>{id}</Dropdown.Item>)
-        });
+        const files_list = files.map((id, i) => {
+                return ({key: i, text: id, value: id})
+            });
 
         let presets = Object.keys(settings || []).map((itemid, i) => {
             return (
@@ -66,10 +67,13 @@ class CoderFiles extends Component {
             <Segment textAlign='center' className="ingest_segment" color='red' raised>
                 <Menu secondary>
                     <Menu.Item>
-                        <Dropdown button text={file || "Select File:"} onClick={this.getFiles}>
-                            <Dropdown.Menu>
-                                {files_list}
-                            </Dropdown.Menu>
+                        <Dropdown multiple selection
+                                  className="multi_select"
+                                  placeholder="Select Files:"
+                                  options={files_list}
+                                  onClick={this.getFiles}
+                                  value={file_set}
+                                  onChange={(e, {value}) => this.selectFile(value)} >
                         </Dropdown>
                     </Menu.Item>
                     <Menu.Item position='right'>
@@ -80,7 +84,7 @@ class CoderFiles extends Component {
                         </Dropdown>
                     </Menu.Item>
                     <Menu.Item>
-                        <Button primary disabled={file === "" || !preset} onClick={this.startCoder}>Start</Button>
+                        <Button primary disabled={file_set.length === 0 || !preset} onClick={this.startCoder}>Start</Button>
                     </Menu.Item>
                 </Menu>
             </Segment>

@@ -11,6 +11,10 @@
   background: #bfecbf;
 }
 
+.multi_select {
+  width: 550px;
+}
+
 .monitor .ui.basic.table {
   font-size: 12px;
 }
