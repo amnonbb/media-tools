@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import MediaUpload from "./MediaUpload";
+import TrimmerFiles from "./TrimmerFiles";
 
 class TrimmerApp extends Component {
 
@@ -12,6 +13,7 @@ class TrimmerApp extends Component {
         return (
             <Fragment>
                 <MediaUpload dest="trimmer" />
+                <TrimmerFiles />
             </Fragment>
         );
     }

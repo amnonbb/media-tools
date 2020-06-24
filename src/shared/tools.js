@@ -3,6 +3,14 @@ export const MTDB_STATE = process.env.REACT_APP_MTDB_STATE;
 export const MTSRV_BACKEND = process.env.REACT_APP_MTSRV_BACKEND;
 export const CNV_BACKEND = process.env.REACT_APP_CNV_BACKEND;
 
+export const toHms = (totalSec) => {
+    let hours = parseInt( totalSec / 3600 , 10) % 24;
+    let minutes = parseInt( totalSec / 60 , 10) % 60;
+    let seconds = (totalSec % 60).toFixed(2);
+    if (seconds < 0) seconds = 0;
+    return (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds  < 10 ? "0" + seconds : seconds);
+};
+
 export const totalSeconds = (time) => {
     var parts = time.split(':');
     return parts[0] * 3600 + parts[1] * 60 + parts[2];
