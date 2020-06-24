@@ -13,7 +13,7 @@ class CoderApp extends Component {
 
         return (
             <Fragment>
-                <MediaUpload />
+                <MediaUpload dest="coder" />
                 <CoderFiles />
                 <div className='monitor'>
                     <CoderMonitor />

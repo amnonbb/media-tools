@@ -26,6 +26,7 @@ class MediaUpload extends Component {
     render() {
 
         const {progress} = this.state;
+        const {dest} = this.props;
 
         let files_progress = Object.keys(progress).map((id) => {
             let count = progress[id];
@@ -33,7 +34,7 @@ class MediaUpload extends Component {
         });
 
         const props = {
-            action: `${MTSRV_BACKEND}/coder/upload`,
+            action: `${MTSRV_BACKEND}/${dest}/upload`,
             type: 'drag',
             accept: '.mp4, .mpg, .mov, .avi, .wav, .mp3, .mp4a',
             beforeUpload(file) {

@@ -4,6 +4,7 @@ import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 import Settings from "./components/Settings";
 import CoderApp from "./components/CoderApp";
+import TrimmerApp from "./components/TrimmerApp";
 
 class App extends Component {
 
@@ -21,6 +22,10 @@ class App extends Component {
         render: () => <Tab.Pane attached={false} >
           <CoderApp getState={this.getState}
                     settings={settings}/>
+        </Tab.Pane> },
+      { menuItem: { key: 'trim', icon: 'cut', content: 'Trimmer' },
+        render: () => <Tab.Pane attached={false} >
+          <TrimmerApp />
         </Tab.Pane> },
       { menuItem: { key: 'settings', icon: 'options', content: 'Options' },
         render: () => <Tab.Pane attached={false} >
