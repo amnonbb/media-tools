@@ -24,7 +24,6 @@ class BackupFiles extends Component {
         let req = {"id":"backup", "req":"files", file_path};
         mediaTools(`files`, req,  (data) => {
             let files = data.jsonst.files;
-            console.log(":: Got files: ",files);
             this.setState({files});
         });
     };
@@ -33,8 +32,8 @@ class BackupFiles extends Component {
         console.log(":: Select file: ",file);
         const {src, year, month} = this.state;
         let file_path = `/mnt/backup/__BACKUP/${year}-${month}/${src}/${file}`
-        let source = MTSRV_BACKEND + "/" + file_path
-        let trim_meta = {file_name: file, inpoints: [], outpoints: [], convert: false};
+        let source = MTSRV_BACKEND + file_path
+        let trim_meta = {file_name: file, inpoints: [], outpoints: [], convert: false, file_path};
         this.setState({file, source, trim_meta});
     };
 

@@ -19,15 +19,15 @@ class TrimmerFiles extends Component {
         let req = {"id":"trimmer", "req":"files"};
         mediaTools(`files`, req,  (data) => {
             let files = data.jsonst.files;
-            console.log(":: Got files: ",files);
             this.setState({files});
         });
     };
 
     selectFile = (file) => {
         console.log(":: Select file: ",file);
-        let source = MTSRV_BACKEND + "/backup/tmp/trimmer/" + file
-        let trim_meta = {file_name: file, inpoints: [], outpoints: [], convert: false};
+        let file_path = `/backup/tmp/trimmer/${file}`
+        let source = MTSRV_BACKEND + file_path
+        let trim_meta = {file_name: file, inpoints: [], outpoints: [], convert: false, file_path};
         this.setState({file, source, trim_meta});
     };
 
@@ -40,7 +40,7 @@ class TrimmerFiles extends Component {
     };
 
     render() {
-        const {file,files,preset} = this.state;
+        const {file,files} = this.state;
 
         const files_list = files.map((id, i) => {
                 return ({key: i, text: id, value: id})
