@@ -1,16 +1,15 @@
 import React, {Component} from 'react'
 import { Menu, Segment, Dropdown, Button, Modal } from 'semantic-ui-react'
-import {getData,mediaTools} from "../shared/tools";
+import {getData, mediaTools, MTSRV_BACKEND} from "../shared/tools";
 import TrimmerModal from "./TrimmerModal";
 
 class TrimmerFiles extends Component {
 
     state = {
-        files: [],
-        file_set: [],
+        file: "",
         preset: null,
         settings: {},
-        data: {},
+        files: [],
     };
 
     componentDidMount() {
@@ -21,7 +20,7 @@ class TrimmerFiles extends Component {
     };
 
     getFiles = () => {
-        let req = {"id":"coder", "req":"files"};
+        let req = {"id":"trimmer", "req":"files"};
         mediaTools(`files`, req,  (data) => {
             let files = data.jsonst.files;
             console.log(":: Got files: ",files);
@@ -29,11 +28,11 @@ class TrimmerFiles extends Component {
         });
     };
 
-    selectFile = (file_set) => {
-        let {data} = this.state;
-        data.file_set = file_set;
-        console.log(":: Select file_set: ",file_set);
-        this.setState({file_set,data});
+    selectFile = (file) => {
+        console.log(":: Select file: ",file);
+        let source = MTSRV_BACKEND + "/backup/tmp/trimmer/" + file
+        let trim_meta = {file_name: file, inpoints: [], outpoints: [], convert: false};
+        this.setState({file, source, trim_meta});
     };
 
     sendToTrim = () => {
@@ -45,7 +44,7 @@ class TrimmerFiles extends Component {
     };
 
     render() {
-        const {file_set,files,preset,settings} = this.state;
+        const {file,files,preset} = this.state;
 
         const files_list = files.map((id, i) => {
                 return ({key: i, text: id, value: id})
@@ -56,12 +55,12 @@ class TrimmerFiles extends Component {
             <Segment textAlign='center' className="ingest_segment" color='red' raised>
                 <Menu secondary>
                     <Menu.Item>
-                        <Dropdown multiple selection
+                        <Dropdown selection
                                   className="multi_select"
                                   placeholder="Select Files:"
                                   options={files_list}
                                   onClick={this.getFiles}
-                                  value={file_set}
+                                  value={file}
                                   onChange={(e, {value}) => this.selectFile(value)} >
                         </Dropdown>
                     </Menu.Item>
@@ -73,7 +72,7 @@ class TrimmerFiles extends Component {
                         </Dropdown>
                     </Menu.Item>
                     <Menu.Item>
-                        <Button primary disabled={file_set.length === 0} onClick={this.sendToTrim}>Start</Button>
+                        <Button primary disabled={!file} onClick={this.sendToTrim}>Start</Button>
                     </Menu.Item>
                 </Menu>
                 <Modal
@@ -83,7 +82,6 @@ class TrimmerFiles extends Component {
                     onClose={this.onClose}
                     open={this.state.open}
                     size="large"
-                    mountNode={document.getElementById("ltr-modal-mount")}
                 >
                     <TrimmerModal
                         source={this.state.source}

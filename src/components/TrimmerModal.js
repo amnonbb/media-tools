@@ -3,13 +3,12 @@ import { Segment, Table, Button, Checkbox } from 'semantic-ui-react'
 import MediaPlayer from "../components/Media/MediaPlayer";
 import TrimmerControls from "./TrimmerControls";
 import InoutControls from "./InoutControls";
-import {getData, putData} from "../shared/tools";
+import {mediaTools} from "../shared/tools";
 
 export default class TrimmerModal extends Component {
 
     state = {
-        ktaim: this.props.mode === "ktaim",
-        lelomikud: false,
+        convert: false,
         player: null,
         trim_meta: {...this.props.trim_meta},
         ioValid: false,
@@ -33,41 +32,39 @@ export default class TrimmerModal extends Component {
 
     postTrimMeta = () => {
         this.setIopState();
-        let {trim_meta,lelomikud,ktaim} = this.state;
+        let {trim_meta} = this.state;
         this.setState({ioValid: false, loading: true});
         setTimeout(() => { this.props.closeModal() }, 2000);
-        if(trim_meta.line)
-            trim_meta.line.artifact_type = lelomikud ? "LELO_MIKUD" : ktaim ? "KTAIM_NIVCHARIM" : "main";
-        let ep = trim_meta.parent.source === "custom" ? "drim" : "trim";
-        putData(`workflow/${ep}`, trim_meta, (cb) => {
-            console.log(":: Trimmer - trim respond: ",cb);
-            if(cb.status !== "ok") {
+        mediaTools(`trimmer`, trim_meta,  (data) => {
+            console.log(":: Trimmer Stated :: ",data);
+            if(data.status !== "ok") {
                 alert("Trimmer: Something goes wrong!");
             }
         });
     };
 
     getIopState = () => {
-        getData('state/trimmer/'+this.props.mode, (iop) => {
-            if(iop.inpoints.length > 0)
-                this.InoutControls.restoreIop(iop)
-        });
+        let iop = JSON.parse(localStorage.getItem("iop"))
+        if(iop && iop.inpoints.length > 0)
+            this.InoutControls.restoreIop(iop)
     };
 
     setIopState = () => {
         const {inpoints, outpoints} = this.state.trim_meta;
         let iop = {inpoints, outpoints};
         console.log(":: setIopState", iop);
-        putData(`state/trimmer/`+this.props.mode, iop, (cb) => {
-            console.log(":: setIopState respond: ",cb);
-        });
+        localStorage.setItem("iop", JSON.stringify(iop))
     };
 
-    toggleLelomikud = () => this.setState({ lelomikud: !this.state.lelomikud });
+    toggleConvert = () => {
+        let {trim_meta} = this.state;
+        trim_meta.convert = !this.state.convert;
+        this.setState({ convert: !this.state.convert, trim_meta });
+    };
 
     render() {
-        const {mode,source} = this.props;
-        const {player,trim_meta,lelomikud,ioValid,loading} = this.state;
+        const {source} = this.props;
+        const {player,trim_meta,convert,ioValid,loading} = this.state;
 
         return (
             <Table className='table_main'>
@@ -103,12 +100,7 @@ export default class TrimmerModal extends Component {
                             </Segment>
                         </Table.Cell>
                         <Table.Cell>
-                            {
-                                mode === "ktaim" ?
-                                <Checkbox label='Ktaim' checked disabled />
-                                :
-                                <Checkbox label='LeloMikud' onClick={this.toggleLelomikud} checked={lelomikud} />
-                            }
+                            <Checkbox label='Convert' onClick={this.toggleConvert} checked={convert} />
                         </Table.Cell>
                         <Table.Cell textAlign='center'>
                             <Button size='big' color='red'

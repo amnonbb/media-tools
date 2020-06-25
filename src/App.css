@@ -61,9 +61,8 @@
   padding: .2em .3em;
 }
 
-.ingest_segment .mejs__container {
-  height: 40px!important;
-  width: auto!important;
+.mejs__container {
+  height: 410px!important;
 }
 
 .trimmed_label {
