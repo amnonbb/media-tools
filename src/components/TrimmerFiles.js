@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { Menu, Segment, Dropdown, Button, Modal } from 'semantic-ui-react'
-import {getData, mediaTools, MTSRV_BACKEND} from "../shared/tools";
+import {mediaTools, MTSRV_BACKEND} from "../shared/tools";
 import TrimmerModal from "./TrimmerModal";
 
 class TrimmerFiles extends Component {
@@ -13,10 +13,6 @@ class TrimmerFiles extends Component {
     };
 
     componentDidMount() {
-        getData(`settings`, (settings) => {
-            console.log(":: Got settings: ",settings);
-            this.setState({settings});
-        });
     };
 
     getFiles = () => {
@@ -65,14 +61,7 @@ class TrimmerFiles extends Component {
                         </Dropdown>
                     </Menu.Item>
                     <Menu.Item position='right'>
-                        <Dropdown button text={preset || "Select Preset:"}>
-                            <Dropdown.Menu>
-
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </Menu.Item>
-                    <Menu.Item>
-                        <Button primary disabled={!file} onClick={this.sendToTrim}>Start</Button>
+                        <Button primary disabled={!file} onClick={this.sendToTrim}>Open</Button>
                     </Menu.Item>
                 </Menu>
                 <Modal
