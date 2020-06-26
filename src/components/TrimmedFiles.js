@@ -32,7 +32,7 @@ class TrimmedFiles extends Component {
                 let trimmed = data.jsonst.files;
                 this.setState({trimmed});
             });
-        }, 10000 );
+        }, 3000 );
         this.setState({ival});
     };
 
@@ -62,22 +62,15 @@ class TrimmedFiles extends Component {
 
         let l = (<Loader size='mini' active inline />);
         let v = (<Icon name='checkmark'/>);
-        let d = (<Icon color='blue' name='lock'/>);
 
         let trimmer_data = trimmed.map((data, i) => {
             //let time = moment.unix(id.substr(1)).format("HH:mm:ss") || "";
-            let time = ""
-            // let mhref = `${MTSRV_BACKEND}/content_units/${data.line.unit_id}`;
-            // let mdb_link = wfsend ? (<a target="_blank" rel="noopener noreferrer" href={mhref}>{data.line.uid}</a>) : "";
-            // let ctype = data.line.collection_type === "DAILY_LESSON" ? "lessons" : "programs";
-            // let khref = `${MTSRV_BACKEND}/${ctype}/cu/${data.line.uid}`;
-            // let km_link = kmedia ? (<a target="_blank" rel="noopener noreferrer" href={khref}>KM {a}</a>) : x;
-            // let rowcolor = censored && !checked;
+            let progress = data.match(/in_progress/);
             let active = this.state.name === data ? 'active' : 'monitor_tr';
             return (
-                <Table.Row key={i} className={active}
+                <Table.Row key={i} className={active} disabled={progress}
                            onClick={() => this.selectFile(data)}>
-                    <Table.Cell>{time}</Table.Cell>
+                    <Table.Cell>{progress ? l : v}</Table.Cell>
                     <Table.Cell>{data}</Table.Cell>
                 </Table.Row>
             )
@@ -107,7 +100,7 @@ class TrimmedFiles extends Component {
                     <Table selectable compact='very' basic size='small' structured>
                         <Table.Header>
                             <Table.Row className='table_header'>
-                                <Table.HeaderCell width={2}>Time</Table.HeaderCell>
+                                <Table.HeaderCell width={2}>Progress</Table.HeaderCell>
                                 <Table.HeaderCell width={12}>File Name</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
