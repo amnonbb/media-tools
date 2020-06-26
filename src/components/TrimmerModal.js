@@ -100,7 +100,7 @@ export default class TrimmerModal extends Component {
                             </Segment>
                         </Table.Cell>
                         <Table.Cell>
-                            <Checkbox label='Convert' onClick={this.toggleConvert} checked={convert} disabled />
+                            <Checkbox label='Convert' onClick={this.toggleConvert} checked={convert} />
                         </Table.Cell>
                         <Table.Cell textAlign='center'>
                             <Button size='big' color='red'
