@@ -38,8 +38,7 @@ class TrimmedFiles extends Component {
 
     selectFile = (file) => {
         console.log(":: Select file: ",file);
-        let file_path = `/backup/tmp/trimmed/${file}`
-        let source = MTSRV_BACKEND + file_path
+        let source = `/dl/backup/tmp/trimmed/${file}`
         this.setState({name: file, source});
     };
 

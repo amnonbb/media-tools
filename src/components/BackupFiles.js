@@ -12,7 +12,7 @@ class BackupFiles extends Component {
         files: [],
         src: "ShiurBoker",
         year: "2020",
-        month: "01",
+        month: "06",
     };
 
     componentDidMount() {

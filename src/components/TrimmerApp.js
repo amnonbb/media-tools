@@ -14,8 +14,8 @@ class TrimmerApp extends Component {
 
         return (
             <Fragment>
-                <MediaUpload dest="trimmer" />
-                <TrimmerFiles />
+                {/*<MediaUpload dest="trimmer" />*/}
+                {/*<TrimmerFiles />*/}
                 <BackupFiles />
                 <TrimmedFiles />
             </Fragment>
