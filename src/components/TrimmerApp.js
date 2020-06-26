@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from 'react'
+import { Tab } from 'semantic-ui-react'
 import MediaUpload from "./MediaUpload";
 import TrimmerFiles from "./TrimmerFiles";
 import BackupFiles from "./BackupFiles";
@@ -12,11 +13,14 @@ class TrimmerApp extends Component {
 
     render() {
 
+        const panes = [
+            { menuItem: 'Backup', render: () => <Tab.Pane><BackupFiles /></Tab.Pane> },
+            { menuItem: 'Upload', render: () => <Tab.Pane><MediaUpload dest="trimmer" /><TrimmerFiles /></Tab.Pane> },
+        ]
+
         return (
             <Fragment>
-                {/*<MediaUpload dest="trimmer" />*/}
-                {/*<TrimmerFiles />*/}
-                <BackupFiles />
+                <Tab panes={panes} />
                 <TrimmedFiles />
             </Fragment>
         );
