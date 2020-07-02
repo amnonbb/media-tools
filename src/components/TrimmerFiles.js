@@ -19,7 +19,8 @@ class TrimmerFiles extends Component {
         let req = {"id":"trimmer", "req":"files"};
         mediaTools(`files`, req,  (data) => {
             let files = data.jsonst.files;
-            this.setState({files});
+            if(files)
+                this.setState({files});
         });
     };
 

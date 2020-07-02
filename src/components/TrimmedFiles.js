@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {mediaTools, MTSRV_BACKEND} from '../shared/tools';
+import {mediaTools} from '../shared/tools';
 import {Menu, Segment, Label, Icon, Table, Loader, Button, Modal, Message} from 'semantic-ui-react'
 import MediaPlayer from "../components/Media/MediaPlayer";
 
