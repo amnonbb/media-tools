@@ -30,7 +30,8 @@ class TrimmedFiles extends Component {
             let req = {"id":"trimmed", "req":"files"};
             mediaTools(`files`, req,  (data) => {
                 let trimmed = data.jsonst.files;
-                this.setState({trimmed});
+                if(trimmed)
+                    this.setState({trimmed});
             });
         }, 3000 );
         this.setState({ival});
