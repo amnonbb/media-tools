@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Progress,Message,Segment } from 'semantic-ui-react';
 import Upload from 'rc-upload';
-import {MTSRV_BACKEND} from "../shared/tools";
+import {mediaTools, MTSRV_BACKEND} from "../shared/tools";
 
 class MediaUpload extends Component {
 
@@ -19,6 +19,15 @@ class MediaUpload extends Component {
     uploadDone = (file) => {
         let {progress} = this.state;
         console.log("Upload done", file);
+        if(this.props.dest === "trimmer" && file.type !== "video/mp4") {
+            console.log("Convert is needed");
+            mediaTools(`convert`, file,  (data) => {
+                console.log(":: Convert Stated :: ",data);
+                if(data.status !== "ok") {
+                    alert("Trimmer: Something goes wrong!");
+                }
+            });
+        }
         delete progress[file.file_name];
         this.setState({progress})
     };
