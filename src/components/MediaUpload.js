@@ -25,11 +25,15 @@ class MediaUpload extends Component {
                 console.log(":: Convert Stated :: ",data);
                 if(data.status !== "ok") {
                     alert("Trimmer: Something goes wrong!");
+                } else {
+                    delete progress[file.file_name];
+                    this.setState({progress})
                 }
             });
+        } else {
+            delete progress[file.file_name];
+            this.setState({progress})
         }
-        delete progress[file.file_name];
-        this.setState({progress})
     };
 
     render() {
