@@ -10,18 +10,22 @@ class BackupFiles extends Component {
         preset: null,
         settings: {},
         files: [],
-        src: "ShiurBoker",
-        year: "2020",
-        month: "06",
+        src: "Rawmaterial",
+        year: "",
+        month: "",
     };
 
     componentDidMount() {
+        let year = new Date().getFullYear().toString();
+        let m = new Date().getMonth();
+        let month = m < 10 ? "0" + m.toString() : m;
+        this.setState({year, month});
     };
 
     getFiles = () => {
         const {src, year, month} = this.state;
         let file_path = `/mnt/backup/__BACKUP/${year}-${month}/${src}`
-        let req = {"id":"backup", "req":"files", file_path};
+        let req = {"id":"backup", "req":"oren_files", file_path};
         mediaTools(`files`, req,  (data) => {
             let files = data.jsonst.files;
             this.setState({files});
@@ -64,11 +68,11 @@ class BackupFiles extends Component {
             return ({ key: i, text: data, value: data })
         });
 
-        const src_options = [
-            { key: 1, text: 'ShiurBoker', value: 'ShiurBoker' },
-            { key: 2, text: 'Special', value: 'Special' },
-            { key: 3, text: 'Rawmaterial', value: 'Rawmaterial' },
-        ];
+        // const src_options = [
+        //     { key: 1, text: 'ShiurBoker', value: 'ShiurBoker' },
+        //     { key: 2, text: 'Special', value: 'Special' },
+        //     { key: 3, text: 'Rawmaterial', value: 'Rawmaterial' },
+        // ];
 
         const year_options = [
             { key: 1, text: '2020', value: '2020' },
@@ -95,17 +99,17 @@ class BackupFiles extends Component {
         return (
             <Segment textAlign='center' className="ingest_segment" color='red' raised>
                 <Menu secondary>
-                    <Menu.Item>
-                        <Dropdown
-                            compact
-                            className="trim_src_dropdown"
-                            selection
-                            options={src_options}
-                            defaultValue="ShiurBoker"
-                            onChange={(e, {value}) => this.setSrc(value)}
-                        >
-                        </Dropdown>
-                    </Menu.Item>
+                    {/*<Menu.Item>*/}
+                    {/*    <Dropdown*/}
+                    {/*        compact*/}
+                    {/*        className="trim_src_dropdown"*/}
+                    {/*        selection*/}
+                    {/*        options={src_options}*/}
+                    {/*        defaultValue="Rawmaterial"*/}
+                    {/*        onChange={(e, {value}) => this.setSrc(value)}*/}
+                    {/*    >*/}
+                    {/*    </Dropdown>*/}
+                    {/*</Menu.Item>*/}
                     <Menu.Item>
                         <Select
                                 compact options={year_options}

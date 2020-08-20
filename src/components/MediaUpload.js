@@ -49,7 +49,7 @@ class MediaUpload extends Component {
         const props = {
             action: `${MTSRV_BACKEND}/${dest}/upload`,
             type: 'drag',
-            accept: '.mp4, .mpg, .mov, .avi, .wav, .mp3, .mp4a',
+            accept: '.mp4, .mp3, .mp4a',
             beforeUpload(file) {
                 console.log('beforeUpload', file.name);
             },

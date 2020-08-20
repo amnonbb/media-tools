@@ -27,7 +27,7 @@ class TrimmedFiles extends Component {
 
     runPolling = () => {
         let ival = setInterval(() => {
-            let req = {"id":"trimmed", "req":"files"};
+            let req = {"id":"trimmed", "req":"oren_files"};
             mediaTools(`files`, req,  (data) => {
                 let trimmed = data.jsonst.files;
                 if(trimmed)
@@ -39,7 +39,7 @@ class TrimmedFiles extends Component {
 
     selectFile = (file) => {
         console.log(":: Select file: ",file);
-        let source = `/dl/backup/tmp/trimmed/${file}`
+        let source = `/dl/backup/tmp/oren_trimmed/${file}`
         this.setState({name: file, source});
     };
 

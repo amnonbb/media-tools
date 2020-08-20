@@ -35,7 +35,7 @@ export default class TrimmerModal extends Component {
         let {trim_meta} = this.state;
         this.setState({ioValid: false, loading: true});
         setTimeout(() => { this.props.closeModal() }, 2000);
-        mediaTools(`trimmer`, trim_meta,  (data) => {
+        mediaTools(`oren_trimmer`, trim_meta,  (data) => {
             console.log(":: Trimmer Stated :: ",data);
             if(data.status !== "ok") {
                 alert("Trimmer: Something goes wrong!");
