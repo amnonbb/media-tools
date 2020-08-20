@@ -15,7 +15,7 @@ class App extends Component {
 
   render() {
 
-    const {settings} = this.state;
+    //const {settings} = this.state;
 
     const panes = [
       // { menuItem: { key: 'coder', icon: 'cog', content: 'Coder' },

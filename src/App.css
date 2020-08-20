@@ -1,3 +1,12 @@
+.timer {
+  font-size: 3em!important;
+  padding-top: 0em !important;
+  padding-right: 1em !important;
+  padding-bottom: 0em !important;
+  padding-left: 1em !important;
+  background-color: #98c698 !important;
+}
+
 .upload-block {
   display: inline-block;
   margin: auto;

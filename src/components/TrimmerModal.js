@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Segment, Table, Button, Checkbox } from 'semantic-ui-react'
+import { Segment, Table, Button, Message } from 'semantic-ui-react'
 import MediaPlayer from "../components/Media/MediaPlayer";
 import TrimmerControls from "./TrimmerControls";
 import InoutControls from "./InoutControls";
-import {mediaTools} from "../shared/tools";
+import {mediaTools, toHms} from "../shared/tools";
 
 export default class TrimmerModal extends Component {
 
@@ -13,6 +13,7 @@ export default class TrimmerModal extends Component {
         trim_meta: {...this.props.trim_meta},
         ioValid: false,
         loading: false,
+        sum_time: "00:00:00.00",
     };
 
     getPlayer = (player) => {
@@ -21,13 +22,16 @@ export default class TrimmerModal extends Component {
     };
 
     getInouts = (inpoints, outpoints) => {
+        let st = 0
         this.setState({ioValid: true});
         for(let i=0; i<inpoints.length; i++) {
             if(inpoints[i] > outpoints[i]) {
                 this.setState({ioValid: false});
+            } else {
+                st = st + outpoints[i] - inpoints[i];
             }
         }
-        this.setState({trim_meta: {...this.state.trim_meta, inpoints, outpoints}});
+        this.setState({trim_meta: {...this.state.trim_meta, inpoints, outpoints}, sum_time: toHms(st)});
     };
 
     postTrimMeta = () => {
@@ -64,7 +68,7 @@ export default class TrimmerModal extends Component {
 
     render() {
         const {source} = this.props;
-        const {player,trim_meta,convert,ioValid,loading} = this.state;
+        const {player,trim_meta,sum_time,ioValid,loading} = this.state;
 
         return (
             <Table className='table_main'>
@@ -99,15 +103,18 @@ export default class TrimmerModal extends Component {
                                 <b>{trim_meta.file_name}</b>
                             </Segment>
                         </Table.Cell>
-                        <Table.Cell>
-                            <Checkbox label='Convert' onClick={this.toggleConvert} checked={convert} />
-                        </Table.Cell>
                         <Table.Cell textAlign='center'>
                             <Button size='big' color='red'
                                     disabled={!ioValid}
                                     loading={loading}
                                     onClick={this.postTrimMeta}>Trim
                             </Button>
+                        </Table.Cell>
+                        <Table.Cell textAlign='center'>
+                            <Message compact
+                                     // negative={status === "Off"}
+                                     // positive={status === "On"}
+                                     className='timer' >{sum_time}</Message>
                         </Table.Cell>
                     </Table.Row>
                 </Table.Body>

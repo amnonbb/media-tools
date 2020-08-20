@@ -12,7 +12,7 @@ export const toHms = (totalSec) => {
 };
 
 export const totalSeconds = (time) => {
-    var parts = time.split(':');
+    let parts = time.split(':');
     return parts[0] * 3600 + parts[1] * 60 + parts[2];
 };
 
