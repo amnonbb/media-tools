@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Button, Label } from 'semantic-ui-react'
+import {Button, Label, Message} from 'semantic-ui-react'
 import { toHms } from '../shared/tools';
 
 export default class InoutControls extends Component {
@@ -86,6 +86,7 @@ export default class InoutControls extends Component {
                         <Button icon color='grey' className="inout_btn"
                                 onClick={() => this.setOut(i)}/>
                     </Button>
+                    <Message compact className='inout_sum' >{toHms(outp - inp)}</Message>
                 </Fragment>
             );
         });

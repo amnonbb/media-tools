@@ -114,7 +114,7 @@ export default class TrimmerModal extends Component {
                             <Message compact
                                      // negative={status === "Off"}
                                      // positive={status === "On"}
-                                     className='timer' >{sum_time}</Message>
+                                     className='overall_sum' >{sum_time}</Message>
                         </Table.Cell>
                     </Table.Row>
                 </Table.Body>
