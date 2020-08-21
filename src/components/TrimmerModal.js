@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment, Table, Button, Message } from 'semantic-ui-react'
+import { Segment, Table, Button, Message, Input, Label, Icon } from 'semantic-ui-react'
 import MediaPlayer from "../components/Media/MediaPlayer";
 import TrimmerControls from "./TrimmerControls";
 import InoutControls from "./InoutControls";
@@ -14,11 +14,25 @@ export default class TrimmerModal extends Component {
         ioValid: false,
         loading: false,
         sum_time: "00:00:00.00",
+        ctime: "",
+        jtime: "",
+        rtime: "",
+    };
+
+    componentDidMount() {
+        document.addEventListener("keydown", this.onKeyPressed);
     };
 
     getPlayer = (player) => {
         console.log(":: Trimmer - got player: ", player);
         this.setState({player: player});
+        player.media.addEventListener("timeupdate", () => {
+            let rt = player.duration - player.currentTime;
+            this.setState({
+                ctime: toHms(player.currentTime),
+                rtime: rt ? toHms(rt) : "00:00:00.00"
+            });
+        });
     };
 
     getInouts = (inpoints, outpoints) => {
@@ -66,9 +80,21 @@ export default class TrimmerModal extends Component {
         this.setState({ convert: !this.state.convert, trim_meta });
     };
 
+    setValue = (value) => {
+        this.setState({jtime: value})
+    };
+
+    onKeyPressed = (e) => {
+        const {jtime} = this.state;
+        if(e.code === "Enter" && jtime) {
+            this.state.player.setCurrentTime(jtime);
+            this.setState({jtime: ""})
+        }
+    };
+
     render() {
         const {source} = this.props;
-        const {player,trim_meta,sum_time,ioValid,loading} = this.state;
+        const {player,trim_meta,sum_time,ioValid,loading,jtime,ctime,rtime} = this.state;
 
         return (
             <Table className='table_main'>
@@ -99,9 +125,12 @@ export default class TrimmerModal extends Component {
                     </Table.Row>
                     <Table.Row>
                         <Table.Cell>
-                            <Segment color='blue' textAlign='center' raised >
-                                <b>{trim_meta.file_name}</b>
-                            </Segment>
+                            {/*<Segment color='blue' textAlign='center' raised >*/}
+                            {/*    <b>{trim_meta.file_name}</b>*/}
+                            {/*</Segment>*/}
+                            <Input className='tjump' type="number" placeholder='Time Jump' value={jtime} onChange={(e) => this.setValue(e.target.value)}/>
+                            <Label size='big' ><Icon name='play' /> {ctime}</Label>
+                            <Label size='big' ><Icon name='hourglass end' /> {rtime}</Label>
                         </Table.Cell>
                         <Table.Cell textAlign='center'>
                             <Button size='big' color='red'
@@ -111,10 +140,7 @@ export default class TrimmerModal extends Component {
                             </Button>
                         </Table.Cell>
                         <Table.Cell textAlign='center'>
-                            <Message compact
-                                     // negative={status === "Off"}
-                                     // positive={status === "On"}
-                                     className='overall_sum' >{sum_time}</Message>
+                            <Message compact className='overall_sum' >{sum_time}</Message>
                         </Table.Cell>
                     </Table.Row>
                 </Table.Body>

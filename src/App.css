@@ -1,3 +1,7 @@
+.tjump {
+  max-width: 120px !important;
+}
+
 .inout_sum {
   font-size: 1.7em!important;
   padding-top: 0em !important;
