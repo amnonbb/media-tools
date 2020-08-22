@@ -160,9 +160,10 @@
 }
 
 .inout_part {
-  border: 1px solid rgba(0,0,0,.87);
-  border-style: inherit;
-  background-color: #80808024;
+  border: 1px;
+  border-color: #767676;
+  border-style: solid;
+  background-color: #d4d4d5;
   border-radius: 10px;
   padding: 5px;
   margin: 2px;
