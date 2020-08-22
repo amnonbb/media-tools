@@ -128,7 +128,7 @@ export default class TrimmerModal extends Component {
                             {/*<Segment color='blue' textAlign='center' raised >*/}
                             {/*    <b>{trim_meta.file_name}</b>*/}
                             {/*</Segment>*/}
-                            <Input className='tjump' type="number" placeholder='Time Jump' value={jtime} onChange={(e) => this.setValue(e.target.value)}/>
+                            <Input className='tjump' size='small' type="number" placeholder='Time Jump' value={jtime} onChange={(e) => this.setValue(e.target.value)}/>
                             <Label size='big' ><Icon name='play' /> {ctime}</Label>
                             <Label size='big' ><Icon name='hourglass end' /> {rtime}</Label>
                         </Table.Cell>

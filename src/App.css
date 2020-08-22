@@ -1,5 +1,6 @@
 .tjump {
   max-width: 120px !important;
+  font-size: 1.1em !important;
 }
 
 .inout_sum {
@@ -86,6 +87,10 @@
 
 .mejs__container {
   height: 410px!important;
+}
+
+.mejs__time-buffering {
+  display: none !important;
 }
 
 .trimmed_label {

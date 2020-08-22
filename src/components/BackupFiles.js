@@ -17,7 +17,7 @@ class BackupFiles extends Component {
 
     componentDidMount() {
         let year = new Date().getFullYear().toString();
-        let m = new Date().getMonth();
+        let m = new Date().getMonth() + 1;
         let month = m < 10 ? "0" + m.toString() : m;
         this.setState({year, month});
     };
