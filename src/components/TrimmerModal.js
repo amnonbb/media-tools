@@ -17,6 +17,7 @@ export default class TrimmerModal extends Component {
         ctime: "",
         jtime: "",
         rtime: "",
+        fname: "",
     };
 
     componentDidMount() {
@@ -50,8 +51,9 @@ export default class TrimmerModal extends Component {
 
     postTrimMeta = () => {
         this.setIopState();
-        let {trim_meta} = this.state;
+        let {trim_meta, fname} = this.state;
         trim_meta.source_trimmer = this.props.source_trimmer;
+        trim_meta.fname = fname;
         this.setState({ioValid: false, loading: true});
         setTimeout(() => { this.props.closeModal() }, 2000);
         mediaTools(`oren_trimmer`, trim_meta,  (data) => {
@@ -85,6 +87,10 @@ export default class TrimmerModal extends Component {
         this.setState({jtime: value})
     };
 
+    setName = (value) => {
+        this.setState({fname: value})
+    };
+
     onKeyPressed = (e) => {
         const {jtime} = this.state;
         if(e.code === "Enter" && jtime) {
@@ -95,7 +101,7 @@ export default class TrimmerModal extends Component {
 
     render() {
         const {source} = this.props;
-        const {player,trim_meta,sum_time,ioValid,loading,jtime,ctime,rtime} = this.state;
+        const {player,trim_meta,sum_time,ioValid,loading,jtime,ctime,rtime,fname} = this.state;
 
         return (
             <Table className='table_main'>
@@ -132,6 +138,7 @@ export default class TrimmerModal extends Component {
                             <Input className='tjump' size='small' type="number" placeholder='Time Jump' value={jtime} onChange={(e) => this.setValue(e.target.value)}/>
                             <Label size='big' ><Icon name='play' /> {ctime}</Label>
                             <Label size='big' ><Icon name='hourglass end' /> {rtime}</Label>
+                            <Input className='tjump' size='small' placeholder='File Name...' value={fname} onChange={(e) => this.setName(e.target.value)}/>
                         </Table.Cell>
                         <Table.Cell textAlign='center'>
                             <Button size='big' color='red'

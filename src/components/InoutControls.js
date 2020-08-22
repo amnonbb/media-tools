@@ -69,7 +69,7 @@ export default class InoutControls extends Component {
         let inout = outpoints.map((outp, i) => {
             let inp = inpoints[i];
             return (
-                <Fragment key={i}>
+                <div key={i} className='inout_part'>
                     <Button as='div' labelPosition='right'>
                         <Button icon color='grey' className="inout_btn"
                                 onClick={() => this.setIn(i)}/>
@@ -87,7 +87,7 @@ export default class InoutControls extends Component {
                                 onClick={() => this.setOut(i)}/>
                     </Button>
                     <Message compact className='inout_sum' >{toHms(outp - inp)}</Message>
-                </Fragment>
+                </div>
             );
         });
 

@@ -1,5 +1,5 @@
 .tjump {
-  max-width: 120px !important;
+  max-width: 130px !important;
   font-size: 1.1em !important;
 }
 
@@ -157,6 +157,15 @@
 
 .frame_control .ui.button:hover {
   background-color: #2185D0!important;
+}
+
+.inout_part {
+  border: 1px solid rgba(0,0,0,.87);
+  border-style: inherit;
+  background-color: #80808024;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 2px;
 }
 
 .inout_content{
