@@ -51,6 +51,7 @@ export default class TrimmerModal extends Component {
     postTrimMeta = () => {
         this.setIopState();
         let {trim_meta} = this.state;
+        trim_meta.source_trimmer = this.props.source_trimmer;
         this.setState({ioValid: false, loading: true});
         setTimeout(() => { this.props.closeModal() }, 2000);
         mediaTools(`oren_trimmer`, trim_meta,  (data) => {

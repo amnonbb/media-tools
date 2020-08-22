@@ -76,7 +76,7 @@ class TrimmerFiles extends Component {
                     <TrimmerModal
                         source={this.state.source}
                         trim_meta={this.state.trim_meta}
-                        source_meta={this.state.trim_src}
+                        source_trimmer="upload"
                         mode="ingest"
                         closeModal={this.onClose}
                     />
