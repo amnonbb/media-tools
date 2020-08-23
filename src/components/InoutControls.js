@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import {Button, Label, Message, Input} from 'semantic-ui-react'
-import { toHms } from '../shared/tools';
+import {toHms, totalSeconds} from '../shared/tools';
 
 export default class InoutControls extends Component {
 
@@ -25,26 +25,26 @@ export default class InoutControls extends Component {
         this.props.onSetPoints(inpoints, outpoints);
     };
 
-    setIn = (i) => {
+    setIn = (i, input) => {
         const {inpoints,outpoints} = this.state;
         let currentTime = Number(this.props.player.getCurrentTime().toFixed(2));
         if(i === null) {
-            inpoints[outpoints.length] = currentTime;
+            input ? inpoints[outpoints.length] = totalSeconds(input) : inpoints[outpoints.length] = currentTime;
         } else {
-            inpoints[i] = currentTime;
+            input ? inpoints[i] = totalSeconds(input) : inpoints[i] = currentTime;
             this.props.onSetPoints(inpoints, outpoints);
         }
         console.log(":: Set IN: ",currentTime);
         this.setState({inpoints});
     };
 
-    setOut = (i) => {
+    setOut = (i, input) => {
         const {inpoints,outpoints} = this.state;
         let currentTime = Number(this.props.player.getCurrentTime().toFixed(2));
         if(i === null) {
-            outpoints[inpoints.length - 1] = currentTime;
+            input ? outpoints[inpoints.length - 1] = totalSeconds(input) : outpoints[inpoints.length - 1] = currentTime;
         } else {
-            outpoints[i] = currentTime;
+            input ? outpoints[i] = totalSeconds(input) : outpoints[i] = currentTime;
         }
         console.log(":: Set OUT: ",currentTime);
         this.setState({outpoints}, () => {
@@ -71,13 +71,15 @@ export default class InoutControls extends Component {
             return (
                 <div key={i} className=''>
                     <Input className="inout_left" error={inp > outp ? 'red' : ''}
-                           action={{ icon: 'chevron left' , onClick: () => this.setIn(i)}}
+                           action={{ icon: 'chevron left' , onClick: () => this.setIn(i, null)}}
                            actionPosition='left' value={inp !== null ? toHms(inp) : "<- Set in"}
-                           defaultValue='00:00:00.00' onDoubleClick={() => this.jumpPoint(inp)} />
+                           onDoubleClick={() => this.jumpPoint(inp)}
+                           onChange={(e) => this.setIn(i, e.target.value)}/>
                     <Input className="inout_right" error={inp > outp ? 'red' : ''}
-                           action={{ icon: 'chevron right' , onClick: () => this.setOut(i)}}
+                           action={{ icon: 'chevron right' , onClick: () => this.setOut(i, null)}}
                            actionPosition='right' value={outp !== null ? toHms(outp) : "<- Set in"}
-                           defaultValue='00:00:00.00' onDoubleClick={() => this.jumpPoint(outp)} />
+                           onDoubleClick={() => this.jumpPoint(outp)}
+                           onChange={(e) => this.setOut(i, e.target.value)}/>
                     <Message compact className='inout_sum' >{toHms(outp - inp)}</Message>
                 </div>
             );
