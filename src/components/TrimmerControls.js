@@ -1,16 +1,42 @@
 import React, { Component, Fragment } from 'react';
-import { Segment, Button } from 'semantic-ui-react'
+import {Segment, Button, Input} from 'semantic-ui-react'
 
 export default class TrimmerControls extends Component {
 
-    render() {
+    state = {
+        jtime: "",
+    };
 
+    componentDidMount() {
+        document.addEventListener("keydown", this.onKeyPressed);
+    };
+
+
+    setValue = (value) => {
+        this.setState({jtime: value})
+    };
+
+    onKeyPressed = (e) => {
+        const {jtime} = this.state;
+        if(e.code === "Enter" && jtime) {
+            let a = jtime.split(".");
+            let seconds = (+a[0]) * 60 + (+a[1]);
+            this.props.player.setCurrentTime(seconds);
+            this.setState({jtime: ""})
+        }
+    };
+
+    render() {
+        const {jtime} = this.state;
         const player = this.props.player;
 
         return (
             <Fragment>
                 <Segment raised textAlign='center'>
-                    Speed
+                    <Input className='tjump' size='tiny' type="number" placeholder='Time Jump' value={jtime} onChange={(e) => this.setValue(e.target.value)}/>
+                </Segment>
+                <Segment raised textAlign='center'>
+                    Speed<br />
                     <Button.Group size='mini' className="speed_control">
                         <Button className="btn_speed" onClick={() => player.node.playbackRate -= .25} />
                         <Button.Or text='<' />
@@ -20,7 +46,7 @@ export default class TrimmerControls extends Component {
                     </Button.Group><br />
                 </Segment>
                 <Segment raised textAlign='center' className="time_control">
-                    Time
+                    Time<br />
                     <Button.Group size='mini' >
                         <Button onClick={() => player.node.currentTime -= 300}>-</Button>
                         <Button.Or text='5m' />
@@ -48,7 +74,7 @@ export default class TrimmerControls extends Component {
                     </Button.Group>
                 </Segment>
                 <Segment raised textAlign='center' className="frame_control">
-                    Frames
+                    Frames<br />
                     <Button.Group size='mini' >
                         <Button onClick={() => player.node.currentTime -= 1/25.0}>-</Button>
                         <Button.Or text='1' />

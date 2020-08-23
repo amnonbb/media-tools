@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import {Button, Label, Message} from 'semantic-ui-react'
+import {Button, Label, Message, Input} from 'semantic-ui-react'
 import { toHms } from '../shared/tools';
 
 export default class InoutControls extends Component {
@@ -69,23 +69,15 @@ export default class InoutControls extends Component {
         let inout = outpoints.map((outp, i) => {
             let inp = inpoints[i];
             return (
-                <div key={i} className='inout_part'>
-                    <Button as='div' labelPosition='right'>
-                        <Button icon color='grey' className="inout_btn"
-                                onClick={() => this.setIn(i)}/>
-                        <Label as='a' basic pointing='left' color={inp > outp ? 'red' : ''}
-                               onDoubleClick={() => this.jumpPoint(inp)}>
-                            {inp !== null ? toHms(inp) : "<- Set in"}
-                        </Label>
-                    </Button>
-                    <Button as='div' labelPosition='left' className="inout_btn">
-                        <Label as='a' basic pointing='right' color={inp > outp ? 'red' : ''}
-                               onDoubleClick={() => this.jumpPoint(outp)}>
-                            {outp !== null ? toHms(outp) : "Set out ->"}
-                        </Label>
-                        <Button icon color='grey' className="inout_btn"
-                                onClick={() => this.setOut(i)}/>
-                    </Button>
+                <div key={i} className=''>
+                    <Input className="inout_left" error={inp > outp ? 'red' : ''}
+                           action={{ icon: 'chevron left' , onClick: () => this.setIn(i)}}
+                           actionPosition='left' value={inp !== null ? toHms(inp) : "<- Set in"}
+                           defaultValue='00:00:00.00' onDoubleClick={() => this.jumpPoint(inp)} />
+                    <Input className="inout_right" error={inp > outp ? 'red' : ''}
+                           action={{ icon: 'chevron right' , onClick: () => this.setOut(i)}}
+                           actionPosition='right' value={outp !== null ? toHms(outp) : "<- Set in"}
+                           defaultValue='00:00:00.00' onDoubleClick={() => this.jumpPoint(outp)} />
                     <Message compact className='inout_sum' >{toHms(outp - inp)}</Message>
                 </div>
             );

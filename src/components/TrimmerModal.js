@@ -15,20 +15,17 @@ export default class TrimmerModal extends Component {
         loading: false,
         sum_time: "00:00:00.00",
         ctime: "",
-        jtime: "",
         rtime: "",
-        fname: "",
-    };
-
-    componentDidMount() {
-        document.addEventListener("keydown", this.onKeyPressed);
+        fname: this.props.trim_meta.file_name,
     };
 
     getPlayer = (player) => {
         console.log(":: Trimmer - got player: ", player);
         this.setState({player: player});
         player.media.addEventListener("timeupdate", () => {
-            let rt = player.duration - player.currentTime;
+            const {trim_meta} = this.state;
+            //let rt = player.duration - player.currentTime;
+            let rt = player.currentTime - trim_meta.inpoints[trim_meta.inpoints.length-1];
             this.setState({
                 ctime: toHms(player.currentTime),
                 rtime: rt ? toHms(rt) : "00:00:00.00"
@@ -83,34 +80,24 @@ export default class TrimmerModal extends Component {
         this.setState({ convert: !this.state.convert, trim_meta });
     };
 
-    setValue = (value) => {
-        this.setState({jtime: value})
-    };
-
     setName = (value) => {
         this.setState({fname: value})
     };
 
-    onKeyPressed = (e) => {
-        const {jtime} = this.state;
-        if(e.code === "Enter" && jtime) {
-            this.state.player.setCurrentTime(jtime);
-            this.setState({jtime: ""})
-        }
-    };
-
     render() {
         const {source} = this.props;
-        const {player,trim_meta,sum_time,ioValid,loading,jtime,ctime,rtime,fname} = this.state;
+        const {player,trim_meta,sum_time,ioValid,loading,ctime,rtime,fname} = this.state;
 
         return (
             <Table className='table_main'>
                 <Table.Body>
                     <Table.Row>
-                        <Table.Cell width={5} className='table_media'>
+                        <Table.Cell width={5}>
                             <MediaPlayer
                                 player={this.getPlayer}
-                                source={source} type='video/mp4' />
+                                source={source} type='video/mp4' /><br />
+                            <Label size='big' ><Icon name='play' />Current time: - {ctime}</Label><br /><br />
+                            <Label size='big' ><Icon name='hourglass end' />Last in time: - {rtime}</Label>
                         </Table.Cell>
                         <Table.Cell width={1} className='table_ctls'>
                             <TrimmerControls
@@ -135,10 +122,7 @@ export default class TrimmerModal extends Component {
                             {/*<Segment color='blue' textAlign='center' raised >*/}
                             {/*    <b>{trim_meta.file_name}</b>*/}
                             {/*</Segment>*/}
-                            <Input className='tjump' size='small' type="number" placeholder='Time Jump' value={jtime} onChange={(e) => this.setValue(e.target.value)}/>
-                            <Label size='big' ><Icon name='play' /> {ctime}</Label>
-                            <Label size='big' ><Icon name='hourglass end' /> {rtime}</Label>
-                            <Input className='tjump' size='small' placeholder='File Name...' value={fname} onChange={(e) => this.setName(e.target.value)}/>
+                            <Input fluid size='small' placeholder='File Name...' value={fname} onChange={(e) => this.setName(e.target.value)}/>
                         </Table.Cell>
                         <Table.Cell textAlign='center'>
                             <Button size='big' color='red'

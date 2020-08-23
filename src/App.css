@@ -1,6 +1,6 @@
 .tjump {
   max-width: 130px !important;
-  font-size: 1.1em !important;
+  display: contents !important
 }
 
 .inout_sum {
@@ -114,6 +114,22 @@
   vertical-align: top!important;
 }
 
+.inout_tag .ui.tag.label:hover, .ui.tag.labels .label:hover {
+  background-color: #21BA45!important;
+}
+
+.inout_left {
+  vertical-align: top!important;
+  width: 100px;
+  left: -35px;
+}
+
+.inout_right {
+  vertical-align: top!important;
+  width: 100px;
+  left: 0px;
+}
+
 /* START TRIMMER CONTROL */
 
 .btn_speed {
@@ -172,7 +188,7 @@
 .inout_content{
   overflow-y:scroll;
   top:0px; left:0px;
-  width:100%; height:400px;
+  width:100%; height:700px;
 }
 /* END TRIMMER CONTROL */
 
@@ -202,6 +218,7 @@
 .table_inouts {
   min-width: 310px!important;
   max-width: 310px!important;
+  height: 700px;
 }
 
 .table_ctls{
@@ -210,20 +227,22 @@
 }
 
 .table_media {
-  min-width: 650px!important;
-  max-width: 650px!important;
+  min-width: 550px!important;
+  max-width: 550px!important;
 }
 
 .table_main {
-  min-width: 1120px!important;
-  max-width: 1120px!important;
+  /*min-width: 1120px!important;*/
+  /*max-width: 1120px!important;*/
+  min-height: 710px!important;
+  max-height: 710px!important;
   margin-bottom: 0em!important;
   margin-top: 0em!important;
 }
 
 .trimmer_modal {
-  min-width: 1120px!important;
-  max-width: 1120px!important;
+  /*min-width: 1120px!important;*/
+  /*max-width: 1120px!important;*/
 }
 
 .wfdb_app .ui.basic.table {
@@ -281,4 +300,9 @@
   text-decoration-color: red;
   text-decoration-style: double;
   /*color: #287ab7!important;*/
+}
+
+.ui.tag.label, .ui.tag.labels .label {
+  padding-left: 0.7em !important;
+  padding-right: 0.7em !important;
 }

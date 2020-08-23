@@ -27,7 +27,7 @@ export default class MediaPlayer extends Component {
                 mediaType={this.props.type === 'video/mp4' ? 'video' : 'audio'}
                 preload="true"
                 controls
-                width="640"
+                width="540"
                 height="360"
                 poster=""
                 sources={JSON.stringify(sources)}
