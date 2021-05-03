@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { Menu, Segment, Dropdown, Button, Modal, Select } from 'semantic-ui-react'
 import {mediaTools, MTSRV_BACKEND} from "../shared/tools";
 import TrimmerModal from "./TrimmerModal";
+import moment from 'moment';
 
 class BackupFiles extends Component {
 
@@ -11,8 +12,8 @@ class BackupFiles extends Component {
         settings: {},
         files: [],
         src: "ShiurBoker",
-        year: "2020",
-        month: "06",
+        year: moment().format('YYYY'),
+        month: moment().format('MM'),
     };
 
     componentDidMount() {
@@ -71,9 +72,10 @@ class BackupFiles extends Component {
         ];
 
         const year_options = [
-            { key: 1, text: '2020', value: '2020' },
-            { key: 2, text: '2019', value: '2019' },
-            { key: 3, text: '2018', value: '2018' },
+            { key: 1, text: '2021', value: '2021' },
+            { key: 2, text: '2020', value: '2020' },
+            { key: 3, text: '2019', value: '2019' },
+            { key: 4, text: '2018', value: '2018' },
         ];
 
         const month_options = [

@@ -5,6 +5,7 @@
   "homepage": ".",
   "dependencies": {
     "mediaelement": "4.2.9",
+    "moment": "^2.29.1",
     "rc-upload": "^2.6.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
