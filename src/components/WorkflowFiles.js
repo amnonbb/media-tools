@@ -3,7 +3,6 @@ import { Menu, Segment, Dropdown, Button, Modal, Select } from 'semantic-ui-reac
 import DatePicker from 'react-datepicker';
 import {mediaTools, MTSRV_BACKEND} from "../shared/tools";
 import TrimmerModal from "./TrimmerModal";
-import moment from 'moment';
 
 class WorkflowFiles extends Component {
 
@@ -13,8 +12,8 @@ class WorkflowFiles extends Component {
         settings: {},
         files: [],
         src: "ShiurBoker",
-        date: moment().format('YYYY-MM-DD'),
-        startDate: moment(),
+        date: new Date().toLocaleDateString('sv'),
+        startDate: new Date(),
     };
 
     componentDidMount() {
@@ -40,7 +39,7 @@ class WorkflowFiles extends Component {
     };
 
     changeDate = (data) => {
-        let date = data.format('YYYY-MM-DD');
+        let date = data.toLocaleDateString('sv');
         this.setState({startDate: data, date: date, disabled: true});
     };
 
@@ -78,10 +77,9 @@ class WorkflowFiles extends Component {
                     <Menu.Item>
                         <DatePicker
                             className="datepickercs"
-                            dateFormat="YYYY-MM-DD"
-                            locale='he'
-                            maxDate={moment()}
-                            minDate={moment().add(-40, "days")}
+                            dateFormat="yyyy-MM-dd"
+                            maxDate={new Date()}
+                            minDate={new Date(Date.now() - 40 * 24 * 60 * 60 * 1000)}
                             selected={this.state.startDate}
                             onChange={this.changeDate}
                         />

@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import { Menu, Segment, Dropdown, Button, Modal, Select } from 'semantic-ui-react'
 import {mediaTools, MTSRV_BACKEND} from "../shared/tools";
 import TrimmerModal from "./TrimmerModal";
-import moment from 'moment';
 
 class BackupFiles extends Component {
 
@@ -12,8 +11,8 @@ class BackupFiles extends Component {
         settings: {},
         files: [],
         src: "ShiurBoker",
-        year: moment().format('YYYY'),
-        month: moment().format('MM'),
+        year: new Date().getFullYear(),
+        month: new Date().toLocaleDateString('sv').split('-')[1],
     };
 
     componentDidMount() {
@@ -21,7 +20,7 @@ class BackupFiles extends Component {
 
     getFiles = () => {
         const {src, year, month} = this.state;
-        let file_path = `/mnt/backup/__BACKUP/${year}-${month}/${src}`
+        let file_path = `__BACKUP/${year}-${month}/${src}`
         let req = {"id":"backup", "req":"files", file_path};
         mediaTools(`files`, req,  (data) => {
             let files = data.jsonst.files;
@@ -32,9 +31,9 @@ class BackupFiles extends Component {
     selectFile = (file) => {
         console.log(":: Select file: ",file);
         const {src, year, month} = this.state;
-        let file_path = `/mnt/backup/__BACKUP/${year}-${month}/${src}/${file}`
-        let source = MTSRV_BACKEND + file_path
-        let trim_meta = {file_name: file, inpoints: [], outpoints: [], convert: false, file_path};
+        let file_path = `__BACKUP/${year}-${month}/${src}/${file}`
+        let source = MTSRV_BACKEND + `/mnt/backup/${file_path}`
+        let trim_meta = {file_name: file, inpoints: [], outpoints: [], convert: false, file_path, backup: true};
         this.setState({file, source, trim_meta});
     };
 
@@ -71,12 +70,12 @@ class BackupFiles extends Component {
             { key: 3, text: 'Rawmaterial', value: 'Rawmaterial' },
         ];
 
-        const year_options = [
-            { key: 1, text: '2021', value: '2021' },
-            { key: 2, text: '2020', value: '2020' },
-            { key: 3, text: '2019', value: '2019' },
-            { key: 4, text: '2018', value: '2018' },
-        ];
+        const year_options = [0,1,2,3,4].map(i => {
+            const y = new Date().getFullYear() - i;
+            return ({key: i, text: y, value: y})
+        });
+
+        console.log(year_options)
 
         const month_options = [
             { key: 1, text: '01', value: '01' },
