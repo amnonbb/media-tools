@@ -21,8 +21,8 @@ class WorkflowFiles extends Component {
 
     getFiles = () => {
         const {date} = this.state;
-        let file_path = `/mnt/workflow/trimmed/${date}`
-        let req = {"id":"backup", "req":"files", file_path};
+        let file_path = `trimmed/${date}`
+        let req = {"id":"workflow", "req":"files", file_path};
         mediaTools(`files`, req,  (data) => {
             let files = data.jsonst.files;
             this.setState({files});
@@ -32,9 +32,9 @@ class WorkflowFiles extends Component {
     selectFile = (file) => {
         console.log(":: Select file: ",file);
         const {date} = this.state;
-        let file_path = `/mnt/workflow/trimmed/${date}/${file}`
-        let source = MTSRV_BACKEND + file_path
-        let trim_meta = {file_name: file, inpoints: [], outpoints: [], convert: false, file_path};
+        let file_path = `trimmed/${date}/${file}`
+        let source = MTSRV_BACKEND + `/mnt/workflow/${file_path}`
+        let trim_meta = {file_name: file, inpoints: [], outpoints: [], convert: false, file_path, workflow: true};
         this.setState({file, source, trim_meta});
     };
 

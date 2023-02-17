@@ -51,31 +51,31 @@ class Settings extends Component {
                 <Table.Body>
                     <Table.Row>
                         <Table.Cell>
-                            <Input fluid label='Preset Name' size='mini' placeholder='...' value={name}
+                            <Input fluid label='Preset Name' placeholder='...' value={name}
                                    onChange={(e) => this.setState({name: e.target.value})}/>
                         </Table.Cell>
                     </Table.Row>
                     <Table.Row>
                         <Table.Cell>
-                            <Input fluid label='Video Filter' size='mini' placeholder='...' value={video_filter}
+                            <Input fluid label='Video Filter' placeholder='...' value={video_filter}
                                    onChange={(e) => this.setState({video_filter: e.target.value})}/>
                         </Table.Cell>
                     </Table.Row>
                     <Table.Row>
                         <Table.Cell>
-                            <Input fluid label='Audio Filter' size='mini' placeholder='...' value={audio_filter}
+                            <Input fluid label='Audio Filter' placeholder='...' value={audio_filter}
                                    onChange={(e) => this.setState({audio_filter: e.target.value})}/>
                         </Table.Cell>
                     </Table.Row>
                     <Table.Row>
                         <Table.Cell>
-                            <Input fluid label='Audio Codec' size='mini' placeholder='...' value={audio_codec}
+                            <Input fluid label='Audio Codec' placeholder='...' value={audio_codec}
                                    onChange={(e) => this.setState({audio_codec: e.target.value})}/>
                         </Table.Cell>
                     </Table.Row>
                     <Table.Row>
                         <Table.Cell>
-                            <Input fluid label='Video Codec' size='mini' placeholder='...' value={video_codec}
+                            <Input fluid label='Video Codec' placeholder='...' value={video_codec}
                                    onChange={(e) => this.setState({video_codec: e.target.value})}/>
                         </Table.Cell>
                     </Table.Row>

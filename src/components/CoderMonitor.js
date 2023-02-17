@@ -80,7 +80,7 @@ class CoderMonitor extends Component {
 
             <Segment textAlign='center'>
                 <u>Coder Monitor</u>
-                <Table compact='very' basic size='small'>
+                <Table compact='very' basic>
                     <Table.Header>
                         <Table.Row className='table_header'>
                             <Table.HeaderCell width={2}>Source</Table.HeaderCell>
