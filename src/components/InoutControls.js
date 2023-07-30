@@ -59,6 +59,7 @@ export default class InoutControls extends Component {
         const {inpoints,outpoints} = this.state;
         inpoints.splice(i,1);
         outpoints.splice(i,1);
+        this.props.onSetPoints(inpoints, outpoints);
         this.setState({inpoints, outpoints});
     }
 
