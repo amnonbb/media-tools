@@ -99,7 +99,7 @@ export default class TrimmerModal extends Component {
                             <Label size='big' ><Icon name='play' />Current time: - {ctime}</Label><br /><br />
                             <Label size='big' ><Icon name='hourglass end' />Last in time: - {rtime}</Label>
                         </Table.Cell>
-                        <Table.Cell width={1} className='table_ctls'>
+                        <Table.Cell width={2} className='table_ctls'>
                             <TrimmerControls
                                 player={player} />
                         </Table.Cell>

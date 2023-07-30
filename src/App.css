@@ -1,6 +1,7 @@
 .tjump {
   max-width: 130px !important;
-  display: contents !important
+  display: contents !important;
+  font-size: 0.8em!important;
 }
 
 .inout_sum {
@@ -223,8 +224,8 @@
 }
 
 .table_ctls{
-  min-width: 140px!important;
-  max-width: 140px!important;
+  min-width: 150px!important;
+  max-width: 150px!important;
 }
 
 .table_media {

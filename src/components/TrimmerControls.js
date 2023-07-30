@@ -18,7 +18,7 @@ export default class TrimmerControls extends Component {
 
     onKeyPressed = (e) => {
         const {jtime} = this.state;
-        if(e.code === "Enter" && jtime) {
+        if(e.code === "Enter" || e.code === "NumpadEnter" && jtime) {
             let a = jtime.split(".");
             let seconds = (+a[0]) * 60 + (+a[1]);
             this.props.player.setCurrentTime(seconds);
@@ -40,7 +40,7 @@ export default class TrimmerControls extends Component {
                     <Button.Group size='mini' className="speed_control">
                         <Button className="btn_speed" onClick={() => player.node.playbackRate -= .25} />
                         <Button.Or text='<' />
-                        <Button onClick={() => player.node.playbackRate = 1} >1</Button>
+                        <Button onClick={() => player.node.playbackRate = 1} >{player?.node?.playbackRate}</Button>
                         <Button.Or text='>'/>
                         <Button className="btn_speed" onClick={() => player.node.playbackRate += .25} />
                     </Button.Group><br />
