@@ -14,8 +14,8 @@ export default class MediaPlayer extends Component {
                 autoRewind: false,
                 alwaysShowHours: true,
                 showTimecodeFrameCount: false,
-                useSmoothHover: false,
-                features : ['playpause','tracks','current','progress','duration','volume'],
+                useSmoothHover: true,
+                features : ['speed','playpause','tracks','current','progress','duration','volume'],
             },
 
             tracks = {}
@@ -27,7 +27,7 @@ export default class MediaPlayer extends Component {
                 mediaType={this.props.type === 'video/mp4' ? 'video' : 'audio'}
                 preload="true"
                 controls
-                width="540"
+                width="640"
                 height="360"
                 poster=""
                 sources={JSON.stringify(sources)}

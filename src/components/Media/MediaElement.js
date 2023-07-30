@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import 'mediaelement';
 import 'mediaelement/build/mediaelementplayer.min.css';
+import 'mediaelement-plugins/dist/speed/speed.min.js';
+import 'mediaelement-plugins/dist/speed/speed.min.css';
 
 export default class MediaElement extends Component {
 

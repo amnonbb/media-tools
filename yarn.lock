@@ -2940,13 +2940,13 @@ media-typer@0.3.0:
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
   integrity sha1-hxDXrwqmJvj/+hzgAWhUUmMlV0g=
 
-mediaelement-plugins@2.5.1:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/mediaelement-plugins/-/mediaelement-plugins-2.5.1.tgz#7af73988c76d35193d5774ef54289cbfa67ca9eb"
-  integrity sha512-I4gcdmSDkfutKGV8WOat5NW60pnv4OdYNDfmWtRTJ3hGTxzJpRUNFL/qaHWv7ueTschzSPoYgZj1kc4f/4UjLw==
+mediaelement-plugins@2.6.6:
+  version "2.6.6"
+  resolved "https://registry.yarnpkg.com/mediaelement-plugins/-/mediaelement-plugins-2.6.6.tgz#87e059ca780a22419d06d7deaf3735e09c6a0503"
+  integrity sha512-hlxz8/b9cp+HZ0OcfvR5HczmDZ0i1IpjnBMY3IbM22OMrbzWXdaUvnpPIiE9vL66W5lpmGTx/6y1XqybY2DTqw==
   dependencies:
     global "^4.3.1"
-    mediaelement "^4.0.7"
+    mediaelement "^5.0.1"
 
 mediaelement@4.2.16:
   version "4.2.16"
@@ -2955,12 +2955,13 @@ mediaelement@4.2.16:
   dependencies:
     global "^4.3.1"
 
-mediaelement@^4.0.7:
-  version "4.2.17"
-  resolved "https://registry.yarnpkg.com/mediaelement/-/mediaelement-4.2.17.tgz#6a12a0f0149f2cc0051274fe64a6b7fcab4f4734"
-  integrity sha512-v+NcqaylHNPFbpfPwlyw8/LnKcuSyYlWaMcUvB+zBzP9jkVvHmVl63JebGOC3Zmimh4dRq6vzXlbda4e5jT4VQ==
+mediaelement@^5.0.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/mediaelement/-/mediaelement-5.1.1.tgz#7afc92690b8b8693c95ba485e49046beba017541"
+  integrity sha512-dmS/HT4iV/YlCSSf/Tto66m3sptHnPiTld3Y64lSLnqXYOH/f3vXhA0AW01zEHS37HMAlrYQ0kEDxhpwej+6eA==
   dependencies:
     global "^4.3.1"
+    svg4everybody "^2.1.9"
 
 memfs@^3.2.2:
   version "3.4.1"
@@ -4031,6 +4032,11 @@ supports-color@^8.0.0:
   integrity sha512-MpUEN2OodtUzxvKQl72cUF7RQ5EiHsGvSsVG0ia9c5RbWGL2CI4C7EpPS8UTBIplnlzZiNuV56w+FuNxy3ty2Q==
   dependencies:
     has-flag "^4.0.0"
+
+svg4everybody@^2.1.9:
+  version "2.1.9"
+  resolved "https://registry.yarnpkg.com/svg4everybody/-/svg4everybody-2.1.9.tgz#5bd9f6defc133859a044646d4743fabc28db7e2d"
+  integrity sha512-AS9WORVV/vk520ZHxGTlQzyDBizp/h6WyAYUbKhze/kwvQr43DwJpkIIPBomsUyKqN7N+h1deF92N9PmW+o+9A==
 
 tapable@^1.1.3:
   version "1.1.3"

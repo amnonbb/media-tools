@@ -13,7 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "mediaelement": "4.2.16",
-    "mediaelement-plugins": "2.5.1",
+    "mediaelement-plugins": "2.6.6",
     "rc-upload": "^4.3.3",
     "react": "^17.0.2",
     "react-datepicker": "^4.5.0",
