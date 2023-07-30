@@ -22,7 +22,7 @@ class CoderFiles extends Component {
     getFiles = () => {
         let req = {"id":"coder", "req":"files"};
         mediaTools(`files`, req,  (data) => {
-            let files = data.jsonst.files;
+            let files = data.jsonst.files || [];
             console.log(":: Got files: ",files);
             this.setState({files});
         });

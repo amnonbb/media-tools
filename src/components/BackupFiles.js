@@ -35,9 +35,9 @@ class BackupFiles extends Component {
     selectFile = (file) => {
         console.log(":: Select file: ",file);
         const {src, year, month} = this.state;
-        let file_path = `/mnt/backup/__BACKUP/${year}-${month}/${src}/${file}`
-        let source = MTSRV_BACKEND + file_path
-        let trim_meta = {file_name: file, inpoints: [], outpoints: [], convert: false, file_path};
+        let file_path = `__BACKUP/${year}-${month}/${src}/${file}`
+        let source = MTSRV_BACKEND + `/mnt/backup/${file_path}`
+        let trim_meta = {file_name: file, inpoints: [], outpoints: [], convert: false, file_path, backup: true};
         this.setState({file, source, trim_meta});
     };
 
@@ -74,11 +74,12 @@ class BackupFiles extends Component {
         //     { key: 3, text: 'Rawmaterial', value: 'Rawmaterial' },
         // ];
 
-        const year_options = [
-            { key: 1, text: '2020', value: '2020' },
-            { key: 2, text: '2019', value: '2019' },
-            { key: 3, text: '2018', value: '2018' },
-        ];
+        const year_options = [0,1,2,3,4].map(i => {
+            const y = new Date().getFullYear() - i;
+            return ({key: i, text: y, value: y})
+        });
+
+        console.log(year_options)
 
         const month_options = [
             { key: 1, text: '01', value: '01' },

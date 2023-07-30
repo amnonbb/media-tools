@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {getStatus, IVAL, mediaTools, getPercent, MTSRV_BACKEND} from '../shared/tools';
-import { Table, Container, Loader } from 'semantic-ui-react'
+import { Table, Segment, Loader } from 'semantic-ui-react'
 
 class CoderMonitor extends Component {
 
@@ -78,16 +78,16 @@ class CoderMonitor extends Component {
 
         return (
 
-            <Container textAlign='center'>
+            <Segment textAlign='center'>
                 <u>Coder Monitor</u>
-                <Table compact='very' basic size='small'>
+                <Table compact='very' basic>
                     <Table.Header>
                         <Table.Row className='table_header'>
-                            <Table.HeaderCell width={1}>Source</Table.HeaderCell>
+                            <Table.HeaderCell width={2}>Source</Table.HeaderCell>
                             <Table.HeaderCell width={2}>Preset</Table.HeaderCell>
                             <Table.HeaderCell>File Name</Table.HeaderCell>
                             <Table.HeaderCell width={2}>Duration</Table.HeaderCell>
-                            <Table.HeaderCell width={2}>Progress</Table.HeaderCell>
+                            <Table.HeaderCell width={1}>Progress</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
 
@@ -95,7 +95,7 @@ class CoderMonitor extends Component {
                         {convert_data}
                     </Table.Body>
                 </Table>
-            </Container>
+            </Segment>
         );
     }
 }

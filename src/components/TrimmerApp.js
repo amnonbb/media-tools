@@ -28,3 +28,4 @@ class TrimmerApp extends Component {
 }
 
 export default TrimmerApp;
+

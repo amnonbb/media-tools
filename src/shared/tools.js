@@ -1,7 +1,7 @@
 export const IVAL = 1000;
-export const MTDB_STATE = process.env.REACT_APP_MTDB_STATE;
-export const MTSRV_BACKEND = process.env.REACT_APP_MTSRV_BACKEND;
-export const CNV_BACKEND = process.env.REACT_APP_CNV_BACKEND;
+export const MTDB_STATE = process.env.NODE_ENV !== 'production' ? process.env.REACT_APP_MTDB_STATE : window.location.origin;
+export const MTSRV_BACKEND = process.env.NODE_ENV !== 'production' ? process.env.REACT_APP_MTSRV_BACKEND : window.location.origin;
+export const CNV_BACKEND = process.env.NODE_ENV !== 'production' ? process.env.REACT_APP_CNV_BACKEND : window.location.origin;
 
 export const toHms = (totalSec) => {
     let hours = parseInt( totalSec / 3600 , 10) % 24;
