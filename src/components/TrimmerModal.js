@@ -103,7 +103,7 @@ export default class TrimmerModal extends Component {
                             <TrimmerControls
                                 player={player} />
                         </Table.Cell>
-                        <Table.Cell width={3} className='table_inouts'>
+                        <Table.Cell width={4} className='table_inouts'>
                             <Button.Group attached='top' size='mini'>
                                 <Button onClick={this.setIopState}>Save</Button>
                                 <Button onClick={this.getIopState}>Restore</Button>

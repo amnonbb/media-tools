@@ -112,13 +112,13 @@
 
 .inout_left {
   vertical-align: top!important;
-  width: 100px;
+  width: 120px;
   left: -35px;
 }
 
 .inout_right {
   vertical-align: top!important;
-  width: 100px;
+  width: 120px;
   left: 0px;
 }
 
@@ -217,8 +217,8 @@
 }
 
 .table_inouts {
-  min-width: 310px!important;
-  max-width: 310px!important;
+  min-width: 450px!important;
+  max-width: 450px!important;
   height: 700px;
 }
 

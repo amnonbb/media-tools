@@ -2940,13 +2940,27 @@ media-typer@0.3.0:
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
   integrity sha1-hxDXrwqmJvj/+hzgAWhUUmMlV0g=
 
-mediaelement@^5.0.4:
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/mediaelement/-/mediaelement-5.0.4.tgz#0a14e5e3d0c7568a7a99bd126c9ae3eff9bb5693"
-  integrity sha512-hq/BJrXdTvooQZ2qSMfHKLA0q3ZDcNuHKl3eKWLdX4apoCPx+/9I+OytTr0SrlSyYr9JHUFC1FgLmxEr/RxXXg==
+mediaelement-plugins@2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/mediaelement-plugins/-/mediaelement-plugins-2.5.1.tgz#7af73988c76d35193d5774ef54289cbfa67ca9eb"
+  integrity sha512-I4gcdmSDkfutKGV8WOat5NW60pnv4OdYNDfmWtRTJ3hGTxzJpRUNFL/qaHWv7ueTschzSPoYgZj1kc4f/4UjLw==
   dependencies:
     global "^4.3.1"
-    svg4everybody "^2.1.9"
+    mediaelement "^4.0.7"
+
+mediaelement@4.2.16:
+  version "4.2.16"
+  resolved "https://registry.yarnpkg.com/mediaelement/-/mediaelement-4.2.16.tgz#399a41815478134bbaf0f8f5a216f444de244d72"
+  integrity sha512-5GinxsRpVA36w6tAD6nTqVSiZ0LzIhqUrzD8wzOAtZPPM7NOwOBtz6Oa85VemS+3Jvoo38jM1RvNqwKYJBBxtQ==
+  dependencies:
+    global "^4.3.1"
+
+mediaelement@^4.0.7:
+  version "4.2.17"
+  resolved "https://registry.yarnpkg.com/mediaelement/-/mediaelement-4.2.17.tgz#6a12a0f0149f2cc0051274fe64a6b7fcab4f4734"
+  integrity sha512-v+NcqaylHNPFbpfPwlyw8/LnKcuSyYlWaMcUvB+zBzP9jkVvHmVl63JebGOC3Zmimh4dRq6vzXlbda4e5jT4VQ==
+  dependencies:
+    global "^4.3.1"
 
 memfs@^3.2.2:
   version "3.4.1"
@@ -3008,7 +3022,7 @@ mimic-fn@^2.1.0:
 min-document@^2.19.0:
   version "2.19.0"
   resolved "https://registry.yarnpkg.com/min-document/-/min-document-2.19.0.tgz#7bd282e3f5842ed295bb748cdd9f1ffa2c824685"
-  integrity sha1-e9KC4/WELtKVu3SM3Z8f+iyCRoU=
+  integrity sha512-9Wy1B3m3f66bPPmU5hdA4DR4PB2OfDU/+GS3yAB7IQozE3tqXaVv2zOjgla7MEGSRv95+ILmOuvhLkOK6wJtCQ==
   dependencies:
     dom-walk "^0.1.0"
 
@@ -4017,11 +4031,6 @@ supports-color@^8.0.0:
   integrity sha512-MpUEN2OodtUzxvKQl72cUF7RQ5EiHsGvSsVG0ia9c5RbWGL2CI4C7EpPS8UTBIplnlzZiNuV56w+FuNxy3ty2Q==
   dependencies:
     has-flag "^4.0.0"
-
-svg4everybody@^2.1.9:
-  version "2.1.9"
-  resolved "https://registry.yarnpkg.com/svg4everybody/-/svg4everybody-2.1.9.tgz#5bd9f6defc133859a044646d4743fabc28db7e2d"
-  integrity sha1-W9n23vwTOFmgRGRtR0P6vCjbfi0=
 
 tapable@^1.1.3:
   version "1.1.3"

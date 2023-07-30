@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import {Button, Label, Message, Input} from 'semantic-ui-react'
+import {Button, Label, Message, Input, Segment} from 'semantic-ui-react'
 import {toHms, totalSeconds} from '../shared/tools';
 
 export default class InoutControls extends Component {
@@ -55,6 +55,13 @@ export default class InoutControls extends Component {
         this.props.onSetPoints(inpoints, outpoints);
     };
 
+    removeInout = (i) => {
+        const {inpoints,outpoints} = this.state;
+        inpoints.splice(i,1);
+        outpoints.splice(i,1);
+        this.setState({inpoints, outpoints});
+    }
+
     jumpPoint = (point) => {
         point ? this.props.player.setCurrentTime(point) :
             this.props.player.setCurrentTime(this.state.inpoints[this.state.inpoints.length - 1]);
@@ -69,7 +76,7 @@ export default class InoutControls extends Component {
         let inout = outpoints.map((outp, i) => {
             let inp = inpoints[i];
             return (
-                <div key={i} className=''>
+                <Message key={i} className='' vertical onDismiss={this.removeInout}>
                     <Input className="inout_left" error={inp > outp ? 'red' : ''}
                            action={{ icon: 'chevron left' , onClick: () => this.setIn(i, null)}}
                            actionPosition='left' value={inp !== null ? toHms(inp) : "<- Set in"}
@@ -81,7 +88,7 @@ export default class InoutControls extends Component {
                            onDoubleClick={() => this.jumpPoint(outp)}
                            onChange={(e) => this.setOut(i, e.target.value)}/>
                     <Message compact className='inout_sum' >{toHms(outp - inp)}</Message>
-                </div>
+                </Message>
             );
         });
 
