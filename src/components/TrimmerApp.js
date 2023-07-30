@@ -14,7 +14,7 @@ class TrimmerApp extends Component {
     render() {
 
         const panes = [
-            { menuItem: 'Backup', render: () => <Tab.Pane><BackupFiles /></Tab.Pane> },
+            // { menuItem: 'Backup', render: () => <Tab.Pane><BackupFiles /></Tab.Pane> },
             { menuItem: 'Upload', render: () => <Tab.Pane><MediaUpload dest="oren_trimmer" /><TrimmerFiles /></Tab.Pane> },
         ]
 
