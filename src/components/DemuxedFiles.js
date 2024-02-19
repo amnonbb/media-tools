@@ -78,25 +78,25 @@ class DemuxedFiles extends Component {
 
         return (
             <Segment textAlign='center' className="wfdb_app" color='blue' raised>
-                <Label attached='top' className="filesapp_label"></Label>
-                <Message size='large'>
-                    <Menu size='large' secondary >
-                        <Menu.Item>
-                            <Modal trigger={<Button color='brown' icon='play' disabled={!source} />}
-                                   size='tiny'>
-                                <MediaPlayer player={this.getPlayer} source={source} type='video/mp4' />
-                            </Modal>
-                        </Menu.Item>
-                        <Menu.Item position='right'>
-                            <Button color='teal' disabled={!source} >
-                                <Icon name='download'/>
-                                <a href={source} download={name}>{name}</a>
-                            </Button>
-                        </Menu.Item>
-                    </Menu>
-                </Message>
+                {/*<Label attached='top' className="filesapp_label"></Label>*/}
+                {/*<Message size='large'>*/}
+                {/*    <Menu size='large' secondary >*/}
+                {/*        <Menu.Item>*/}
+                {/*            <Modal trigger={<Button color='brown' icon='play' disabled={!source} />}*/}
+                {/*                   size='tiny'>*/}
+                {/*                <MediaPlayer player={this.getPlayer} source={source} type='video/mp4' />*/}
+                {/*            </Modal>*/}
+                {/*        </Menu.Item>*/}
+                {/*        <Menu.Item position='right'>*/}
+                {/*            <Button color='teal' disabled={!source} >*/}
+                {/*                <Icon name='download'/>*/}
+                {/*                <a href={source} download={name}>{name}</a>*/}
+                {/*            </Button>*/}
+                {/*        </Menu.Item>*/}
+                {/*    </Menu>*/}
+                {/*</Message>*/}
                 <Segment attached raised textAlign='center'>
-                    <Label attached='top' className="files_label">Trimmed</Label>
+                    <Label attached='top' className="files_label">Demuxed</Label>
                     <Table selectable compact='very' basic size='small' structured>
                         <Table.Header>
                             <Table.Row className='table_header'>

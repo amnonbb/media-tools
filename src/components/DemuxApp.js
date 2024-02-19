@@ -4,6 +4,7 @@ import DemuxUpload from "./DemuxUpload";
 import DemuxBackupFiles from "./DemuxBackupFiles";
 import DemuxedFiles from "./DemuxedFiles";
 import DemuxUploadedFiles from "./DemuxUploadedFiles";
+import DemuxWorkflowFiles from "./DemuxWorkflowFiles";
 
 class DemuxApp extends Component {
 
@@ -14,8 +15,9 @@ class DemuxApp extends Component {
     render() {
 
         const panes = [
-            { menuItem: 'Backup', render: () => <Tab.Pane><DemuxBackupFiles /></Tab.Pane> },
-            { menuItem: 'Upload', render: () => <Tab.Pane><DemuxUpload dest="demux" /><DemuxUploadedFiles /></Tab.Pane> },
+            // { menuItem: 'Backup', render: () => <Tab.Pane><DemuxBackupFiles /></Tab.Pane> },
+            { menuItem: 'Workflow', render: () => <Tab.Pane><DemuxWorkflowFiles /></Tab.Pane> },
+            // { menuItem: 'Upload', render: () => <Tab.Pane><DemuxUpload dest="demux" /><DemuxUploadedFiles /></Tab.Pane> },
         ]
 
         return (

@@ -65,22 +65,22 @@ class DemuxUploadedFiles extends Component {
                         <Button primary disabled={!file} onClick={this.sendToTrim}>Open</Button>
                     </Menu.Item>
                 </Menu>
-                <Modal
-                    className="trimmer_modal"
-                    closeOnDimmerClick={false}
-                    closeIcon={true}
-                    onClose={this.onClose}
-                    open={this.state.open}
-                    size="large"
-                >
-                    <TrimmerModal
-                        source={this.state.source}
-                        trim_meta={this.state.trim_meta}
-                        source_meta={this.state.trim_src}
-                        mode="ingest"
-                        closeModal={this.onClose}
-                    />
-                </Modal>
+                {/*<Modal*/}
+                {/*    className="trimmer_modal"*/}
+                {/*    closeOnDimmerClick={false}*/}
+                {/*    closeIcon={true}*/}
+                {/*    onClose={this.onClose}*/}
+                {/*    open={this.state.open}*/}
+                {/*    size="large"*/}
+                {/*>*/}
+                {/*    <TrimmerModal*/}
+                {/*        source={this.state.source}*/}
+                {/*        trim_meta={this.state.trim_meta}*/}
+                {/*        source_meta={this.state.trim_src}*/}
+                {/*        mode="ingest"*/}
+                {/*        closeModal={this.onClose}*/}
+                {/*    />*/}
+                {/*</Modal>*/}
             </Segment>
         );
     }
