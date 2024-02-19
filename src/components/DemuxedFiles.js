@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {mediaTools} from '../shared/tools';
+import {mediaTools, MTSRV_BACKEND} from '../shared/tools';
 import {Menu, Segment, Label, Icon, Table, Loader, Button, Modal, Message} from 'semantic-ui-react'
 import MediaPlayer from "../components/Media/MediaPlayer";
 
@@ -66,12 +66,13 @@ class DemuxedFiles extends Component {
         let trimmer_data = trimmed.map((data, i) => {
             //let time = moment.unix(id.substr(1)).format("HH:mm:ss") || "";
             let progress = data.match(/in_progress/);
+            let href = `/dl/backup/tmp/demuxed/${data}`;
             let active = this.state.name === data ? 'active' : 'monitor_tr';
             return (
                 <Table.Row key={i} className={active} disabled={progress}
                            onClick={() => this.selectFile(data)}>
                     <Table.Cell>{progress ? l : v}</Table.Cell>
-                    <Table.Cell>{data}</Table.Cell>
+                    <Table.Cell>{<a href={href}>{data}</a>}</Table.Cell>
                 </Table.Row>
             )
         });
