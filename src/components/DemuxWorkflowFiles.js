@@ -24,7 +24,7 @@ class DemuxWorkflowFiles extends Component {
         let file_path = `trimmed/${date}`
         let req = {"id":"workflow", "req":"files", file_path};
         mediaTools(`files`, req,  (data) => {
-            let files = data.jsonst.files;
+            let files = data.jsonst.files || [];
             this.setState({files});
         });
     };
@@ -35,7 +35,7 @@ class DemuxWorkflowFiles extends Component {
         let file_path = `trimmed/${date}/${file}`
         let source = MTSRV_BACKEND + `/mnt/workflow/${file_path}`
         let trim_meta = {file_name: file, inpoints: [], outpoints: [], convert: false, file_path, workflow: true};
-        this.setState({file, source, trim_meta});
+        this.setState({file, source, trim_meta, file_path});
     };
 
     changeDate = (data) => {

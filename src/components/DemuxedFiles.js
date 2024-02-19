@@ -29,7 +29,7 @@ class DemuxedFiles extends Component {
         let ival = setInterval(() => {
             let req = {"id":"demuxed", "req":"files"};
             mediaTools(`files`, req,  (data) => {
-                let trimmed = data.jsonst.files;
+                let trimmed = data.jsonst.files || [];
                 if(trimmed)
                     this.setState({trimmed});
             });
