@@ -7,6 +7,7 @@ import Settings from "./components/Settings";
 import CoderApp from "./components/CoderApp";
 import TrimmerApp from "./components/TrimmerApp";
 import DemuxApp from "./components/DemuxApp";
+import MuxApp from "./components/MuxApp";
 
 class App extends Component {
 
@@ -32,6 +33,10 @@ class App extends Component {
       { menuItem: { key: 'demux', icon: 'random', content: 'Demux' },
         render: () => <Tab.Pane attached={false} >
           <DemuxApp />
+        </Tab.Pane> },
+      { menuItem: { key: 'mux', icon: 'sign-out', content: 'Mux' },
+        render: () => <Tab.Pane attached={false} >
+          <MuxApp />
         </Tab.Pane> },
       { menuItem: { key: 'settings', icon: 'options', content: 'Options' },
         render: () => <Tab.Pane attached={false} >
