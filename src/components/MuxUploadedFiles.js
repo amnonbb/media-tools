@@ -18,9 +18,8 @@ class MuxUploadedFiles extends Component {
     getFiles = () => {
         let req = {"id":"mux", "req":"files"};
         mediaTools(`files`, req,  (data) => {
-            let files = data.jsonst.files;
-            if(files)
-                this.setState({files});
+            let files = data.jsonst.files || [];
+            this.setState({files});
         });
     };
 
@@ -29,10 +28,10 @@ class MuxUploadedFiles extends Component {
         let file_path = `/backup/tmp/mux/${file}`
         let source = MTSRV_BACKEND + file_path
         let trim_meta = {file_name: file, inpoints: [], outpoints: [], convert: false, file_path};
-        this.setState({file, source, trim_meta});
+        this.setState({file, source, trim_meta, file_path});
     };
 
-    sendToDemux = () => {
+    sendToMux = () => {
         const {file_path} = this.state;
         let req = {"id":"mux", "req":"start", file_path};
         mediaTools(`files`, req,  (data) => {
@@ -69,7 +68,7 @@ class MuxUploadedFiles extends Component {
                         </Dropdown>
                     </Menu.Item>
                     <Menu.Item position='right'>
-                        <Button primary disabled={!file} onClick={this.sendToTrim}>Open</Button>
+                        <Button primary disabled={!file} onClick={this.sendToMux}>Start</Button>
                     </Menu.Item>
                 </Menu>
                 {/*<Modal*/}

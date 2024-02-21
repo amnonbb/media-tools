@@ -66,7 +66,7 @@ class MuxedFiles extends Component {
         let trimmer_data = trimmed.map((data, i) => {
             //let time = moment.unix(id.substr(1)).format("HH:mm:ss") || "";
             let progress = data.match(/in_progress/);
-            let href = `/dl/backup/tmp/demuxed/${data}`;
+            let href = `/dl/backup/tmp/muxed/${data}`;
             let active = this.state.name === data ? 'active' : 'monitor_tr';
             return (
                 <Table.Row key={i} className={active} disabled={progress}
