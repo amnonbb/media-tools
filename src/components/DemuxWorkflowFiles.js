@@ -24,7 +24,7 @@ class DemuxWorkflowFiles extends Component {
         let file_path = `trimmed/${date}`
         let req = {"id":"workflow", "req":"files", file_path};
         mediaTools(`files`, req,  (data) => {
-            let files = data.jsonst.files || [];
+            let files = data.jsonst.files.filter(r => r.match(/o.mp4/)) || [];
             this.setState({files});
         });
     };
