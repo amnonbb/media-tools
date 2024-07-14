@@ -56,7 +56,6 @@ export default class InoutControls extends Component {
     };
 
     removeInout = (i) => {
-        console.log(i)
         const {inpoints,outpoints} = this.state;
         inpoints.splice(i,1);
         outpoints.splice(i,1);
@@ -76,7 +75,6 @@ export default class InoutControls extends Component {
     render() {
         const {inpoints,outpoints} = this.state;
         let inout = outpoints.map((outp, i) => {
-            console.log(i)
             let inp = inpoints[i];
             return (
                 <Message key={i} className='' vertical onDismiss={() => this.removeInout(i)}>
